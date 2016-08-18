@@ -73,11 +73,14 @@ $sysmod = "$sysmod -lnd_grid $LND_GRID -ocn_grid $OCN_GRID -wav_grid $WAV_GRID";
 system($sysmod) == 0 or die "ERROR cpl.buildnml: $sysmod failed: $?\n";
 
 # -----------------------------------------------------
-# move drv_in, seq_maps.rc and all *modio* files to $RUNDIR
+# move drv_in, drv_flds_in, seq_maps.rc and all *modio* files to $RUNDIR
 # -----------------------------------------------------
 
 if (-d ${RUNDIR}) {
     $sysmod = "cp $CASEBUILD/cplconf/drv_in       ${RUNDIR}/.";
+    system($sysmod) == 0 or die "ERROR cpl.buildnml: $sysmod failed: $?\n";
+
+    $sysmod = "cp $CASEBUILD/cplconf/drv_flds_in  ${RUNDIR}/.";
     system($sysmod) == 0 or die "ERROR cpl.buildnml: $sysmod failed: $?\n";
 
     $sysmod = "cp $CASEBUILD/cplconf/seq_maps.rc  ${RUNDIR}/.";
