@@ -85,6 +85,15 @@
     <lname>HIST_CAM5_CLM50%CN-WISO_CICE%WISO_POP2%ISO_RTM%WISO_SGLC_SWAV</lname>
   </compset>
 
+
+  <compset>
+    <alias>B5505C5WCCML45BGCR</alias>
+    <lname>5505_CAM5%WCCM_CLM45%BGC_CICE_POP2_RTM_SGLC_SWAV</lname>
+  </compset>
+
+
+
+
   <!-- No longer supported B compsets with CLM40 -->
 
   <!-- <compset> -->
@@ -307,11 +316,29 @@
 	<value compset="1850_"     >0001-01-01</value>
 	<value compset="2000_"     >0001-01-01</value>
 	<value compset="HIST_"     >1850-01-01</value>
+	<value compset="5505_CAM5%W">2010-01-01</value>
 	<value compset="5505_"     >1955-01-01</value>
 	<value compset="RCP[2468]_">2005-01-01</value>
 	<value compset="2013_"     >2013-01-01</value>
       </values>
     </entry>
+
+    <entry id="STOP_OPTION">
+      <values>
+	<value compset="5505_CAM5%W">nmonths</value>
+      </values>
+    </entry>
+    <entry id="STOP_N">
+      <values>
+	<value compset="5505_CAM5%W">12</value>
+      </values>
+    </entry>
+    <entry id="CICE_CONFIG_OPTS">
+      <values>
+        <value compset="5505_CAM5%W">-phys cice4</value>
+      </values>
+    </entry>
+
   </entries>
 
 </compsets>
