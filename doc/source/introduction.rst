@@ -130,19 +130,7 @@ specified hardware.
 
 Table: Recommmended Software Package Versions by Machine
 
-    **Caution**
-
-    NetCDF must be built with the same Fortran compiler as CESM. In the
-    netCDF build the FC environment variable specifies which Fortran
-    compiler to use. CESM is written mostly in Fortran, netCDF is
-    written in C. Because there is no standard way to call a C program
-    from a Fortran program, the Fortran to C layer between CESM and
-    netCDF will vary depending on which Fortran compiler you use for
-    CESM. When a function in the netCDF library is called from a Fortran
-    application, the netCDF Fortran API calls the netCDF C library. If
-    you do not use the same compiler to build netCDF and CESM you will
-    in most cases get errors from netCDF saying certain netCDF functions
-    cannot be found.
+.. warning:: NetCDF must be built with the same Fortran compiler as CESM. In the netCDF build the FC environment variable specifies which Fortran compiler to use. CESM is written mostly in Fortran, netCDF is written in C. Because there is no standard way to call a C program from a Fortran program, the Fortran to C layer between CESM and netCDF will vary depending on which Fortran compiler you use for CESM. When a function in the netCDF library is called from a Fortran application, the netCDF Fortran API calls the netCDF C library. If you do not use the same compiler to build netCDF and CESM you will in most cases get errors from netCDF saying certain netCDF functions cannot be found.
 
 Parallel-netCDF, also referred to as pnetcdf, is optional. If a user
 chooses to use pnetcdf, version 1.2.0 or later should be used with CESM.
