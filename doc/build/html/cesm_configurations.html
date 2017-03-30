@@ -1,0 +1,465 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>3. CESM Configurations &#8212; cesm_quickstart  documentation</title>
+    
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="4. Quick Start (CESM Workflow)" href="quickstart.html" />
+    <link rel="prev" title="2. Downloading CESM" href="downloading_cesm.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="quickstart.html" title="4. Quick Start (CESM Workflow)"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="downloading_cesm.html" title="2. Downloading CESM"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cesm_quickstart  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">3. CESM Configurations</a><ul>
+<li><a class="reference internal" href="#cesm-components">3.1. CESM Components</a></li>
+<li><a class="reference internal" href="#cesm-component-sets">3.2. CESM Component Sets</a></li>
+<li><a class="reference internal" href="#cesm-grids">3.3. CESM Grids</a></li>
+<li><a class="reference internal" href="#cesm-machines">3.4. CESM Machines</a></li>
+<li><a class="reference internal" href="#cesm-validation">3.5. CESM Validation</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="downloading_cesm.html"
+                        title="previous chapter">2. Downloading CESM</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="quickstart.html"
+                        title="next chapter">4. Quick Start (CESM Workflow)</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/cesm_configurations.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="cesm-configurations">
+<span id="configurations"></span><h1>3. CESM Configurations<a class="headerlink" href="#cesm-configurations" title="Permalink to this headline">¶</a></h1>
+<p>The CESM system can be configured a number of different ways from both a
+science and technical perspective. CESM supports numerous
+<a class="reference external" href="../modelnl/grid.html">resolutions</a>, and
+<a class="reference external" href="../modelnl/compsets.html">component configurations</a>. In addition, each model
+component has input options to configure specific model physics and
+parameterizations.</p>
+<div class="admonition-todo admonition" id="index-0">
+<p class="first admonition-title">Todo</p>
+<p class="last">put lin linkk to model grids, compsets and model namelists.</p>
+</div>
+<div class="section" id="cesm-components">
+<h2>3.1. CESM Components<a class="headerlink" href="#cesm-components" title="Permalink to this headline">¶</a></h2>
+<p>CESM consists of seven geophysical model components:</p>
+<ul class="simple">
+<li>atmosphere (atm)</li>
+<li>sea-ice (ice)</li>
+<li>land (lnd)</li>
+<li>river (rof)</li>
+<li>ocean (ocn),</li>
+<li>land-ice (glc)</li>
+<li>ocean-wave</li>
+</ul>
+<p>In addition CESM is accompanied by a driver/coupler (cpl7) that
+coordinates the time evolution of geophysical components and
+periocially permits the components to exchange data.  In addition to
+the prognostic model components, each model component may also have an
+&#8220;active,&#8221; &#8220;data,&#8221; &#8220;dead,&#8221; or &#8220;stub&#8221; version that permits the whole
+system to activate and deactive component feedbacks by allowing for a
+variety of &#8220;plug and play&#8221; combinations.</p>
+<p>During the course of a CESM run, the model components integrate forward
+in time, periodically stopping to exchange information with the coupler.
+The coupler meanwhile receives fields from the component models,
+computes, maps, and merges this information, then sends the fields back
+to the component models. The coupler brokers this sequence of
+communication interchanges and manages the overall time progression of
+the coupled system. A CESM component set is comprised of seven
+components: one component from each model (atm, lnd, rof, ocn, ice, glc,
+and wav) plus the coupler. Model components are written primarily in
+Fortran 90/95/2003.</p>
+<p>The active (dynamical) components are generally fully prognostic, and
+they are state-of-the-art climate prediction and analysis tools. Because
+the active models are relatively expensive to run, data models that
+cycle input data are included for testing, spin-up, and model
+parameterization development. The dead components generate
+scientifically invalid data and exist only to support technical system
+testing. The dead components must all be run together and should never
+be combined with any active or data versions of models. Stub components
+exist only to satisfy interface requirements when the component is not
+needed for the model configuration (e.g., the active land component
+forced with atmospheric data does not need ice, ocn, or glc components,
+so ice, ocn, and glc stubs are used).</p>
+<p>The CESM components can be summarized as follows:</p>
+<table border="1" class="colwidths-given docutils" id="id1">
+<caption><span class="caption-text">&#8220;CESM model components&#8221;</span><a class="headerlink" href="#id1" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="12%" />
+<col width="10%" />
+<col width="10%" />
+<col width="10%" />
+<col width="59%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Component Generic Type</th>
+<th class="head">Component Generic Name</th>
+<th class="head">Component Name</th>
+<th class="head">Component Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>atmosphere</td>
+<td>atm</td>
+<td>cam</td>
+<td>active</td>
+<td>The Community Atmosphere Model (CAM) is a global atmospheric general circulation model developed from the NCAR CCM3.</td>
+</tr>
+<tr class="row-odd"><td>atmosphere</td>
+<td>atm</td>
+<td>datm</td>
+<td>data</td>
+<td>The data atmosphere component is a pure data component that reads in atmospheric forcing data</td>
+</tr>
+<tr class="row-even"><td>atmosphere</td>
+<td>atm</td>
+<td>xatm</td>
+<td>dead</td>
+<td>Used only for testing the driver/coupler</td>
+</tr>
+<tr class="row-odd"><td>atmosphere</td>
+<td>atm</td>
+<td>satm</td>
+<td>stub</td>
+<td>Used only to satisy the interface requirements</td>
+</tr>
+<tr class="row-even"><td>land</td>
+<td>lnd</td>
+<td>clm</td>
+<td>active</td>
+<td>The Community Land Model (CLM) is the result of a collaborative project between scientists in the Terrestrial Sciences Section of the Climate and Global Dynamics Division (CGD) at NCAR and the CESM Land Model Working Group. Other principal working groups that also contribute to the CLM are Biogeochemistry, Paleoclimate, and Climate Change and Assessment.</td>
+</tr>
+<tr class="row-odd"><td>land</td>
+<td>lnd</td>
+<td>dlnd</td>
+<td>data</td>
+<td>The data land component is a purely data-land component (reading in coupler history data for atm/land fluxes and land albedos produced by a previous run, or snow surface mass balance fields) or both.</td>
+</tr>
+<tr class="row-even"><td>land</td>
+<td>lnd</td>
+<td>xlnd</td>
+<td>dead</td>
+<td>Used only for testing the driver/coupler</td>
+</tr>
+<tr class="row-odd"><td>land</td>
+<td>lnd</td>
+<td>slnd</td>
+<td>stub</td>
+<td>Used only to satisy the interface requirements</td>
+</tr>
+<tr class="row-even"><td>river</td>
+<td>rof</td>
+<td>rtm</td>
+<td>active</td>
+<td>The river transport model (RTM) was previously part of CLM and was developed to route total runoff from the land surface model to either the active ocean or marginal seas which enables the hydrologic cycle to be closed (Branstetter 2001, Branstetter and Famiglietti 1999). This is needed to model ocean convection and circulation, which is affected by freshwater input.</td>
+</tr>
+<tr class="row-odd"><td>river</td>
+<td>rof</td>
+<td>mosart</td>
+<td>active</td>
+<td>TODO: put in a description of mosart</td>
+</tr>
+<tr class="row-even"><td>river</td>
+<td>rof&#8221;</td>
+<td>drof</td>
+<td>data</td>
+<td>The data runoff model was previously part of the data land model and functions as a purely data-runoff model (reading in runoff data).</td>
+</tr>
+<tr class="row-odd"><td>river</td>
+<td>rof&#8221;</td>
+<td>xrof</td>
+<td>dead</td>
+<td>Used only for testing the driver/coupler</td>
+</tr>
+<tr class="row-even"><td>river</td>
+<td>rof&#8221;</td>
+<td>srof</td>
+<td>stub</td>
+<td>Used only to satisy the interface requirements</td>
+</tr>
+<tr class="row-odd"><td>ocean</td>
+<td>ocn&#8221;</td>
+<td>pop</td>
+<td>active</td>
+<td>The ocean model is an extension of the Parallel Ocean Program (POP) Version 2 from Los Alamos National Laboratory (LANL).</td>
+</tr>
+<tr class="row-even"><td>ocean</td>
+<td>ocn&#8221;</td>
+<td>docn</td>
+<td>data</td>
+<td>The data ocean component has two distinct modes of operation. It can run as a pure data model, reading ocean SSTs (normally climatological) from input datasets, interpolating in space and time, and then passing these to the coupler. Alternatively, docn can compute updated SSTs based on a slab ocean model where bottom ocean heat flux convergence and boundary layer depths are read in and used with the atmosphere/ocean and ice/ocean fluxes obtained from the coupler.</td>
+</tr>
+<tr class="row-odd"><td>ocean</td>
+<td>ocn&#8221;</td>
+<td>xocn</td>
+<td>dead</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>ocean</td>
+<td>ocn&#8221;</td>
+<td>socn</td>
+<td>stub</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>sea-ice</td>
+<td>ice&#8221;</td>
+<td>cice&#8221;</td>
+<td>active&#8221;</td>
+<td>The sea-ice component (CICE) is an extension of the Los Alamos National Laboratory (LANL) sea-ice model and was developed though collaboration within the CESM Polar Climate Working Group (PCWG). In CESM, CICE can run as a fully prognostic component or in prescribed mode where ice coverage (normally climatological) is read in.</td>
+</tr>
+<tr class="row-even"><td>sea-ice</td>
+<td>ice&#8221;</td>
+<td>dice</td>
+<td>data</td>
+<td>The data ice component is a partially prognostic model. The model reads in ice coverage and receives atmospheric forcing from the coupler, and then it calculates the ice/atmosphere and ice/ocean fluxes. The data ice component acts very similarly to CICE running in prescribed mode.</td>
+</tr>
+<tr class="row-odd"><td>sea-ice</td>
+<td>ice&#8221;</td>
+<td>xice</td>
+<td>dead</td>
+<td>Used only for testing the driver/coupler</td>
+</tr>
+<tr class="row-even"><td>sea-ice</td>
+<td>ice&#8221;</td>
+<td>sice</td>
+<td>stub</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>land-ice</td>
+<td>glc&#8221;</td>
+<td>cism</td>
+<td>active&#8221;</td>
+<td>The CISM component is an extension of the Glimmer ice sheet model.</td>
+</tr>
+<tr class="row-even"><td>land-ice</td>
+<td>glc&#8221;</td>
+<td>sglc</td>
+<td>stub&#8221;</td>
+<td>Used only to satisy the interface requirements</td>
+</tr>
+<tr class="row-odd"><td>ocean-wave</td>
+<td>wav&#8221;</td>
+<td>wav</td>
+<td>ww3&#8221;</td>
+<td>TODO: add in documentation for ww3</td>
+</tr>
+<tr class="row-even"><td>ocean-wave</td>
+<td>wav&#8221;</td>
+<td>xwav</td>
+<td>dead&#8221;</td>
+<td>Used only for testing the driver/coupler</td>
+</tr>
+<tr class="row-odd"><td>ocean-wave</td>
+<td>wav&#8221;</td>
+<td>swav</td>
+<td>stub&#8221;</td>
+<td>Used only to satisy the interface requirements</td>
+</tr>
+<tr class="row-even"><td>coupler</td>
+<td>cpl&#8221;</td>
+<td>cpl&#8221;</td>
+<td>active</td>
+<td>The CESM coupler was built primarily through a collaboration of the NCAR CESM Software Engineering Group and the Argonne National Laboratory (ANL). The MCT coupling library provides much of the infrastructure.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="cesm-component-sets">
+<h2>3.2. CESM Component Sets<a class="headerlink" href="#cesm-component-sets" title="Permalink to this headline">¶</a></h2>
+<p>The CESM components can be combined in numerous ways to carry out
+various scientific or software experiments. A particular mix of
+components, <em>along with</em> component-specific configuration and/or
+namelist settings is called a component set or &#8220;compset.&#8221; CESM has a
+shorthand naming convention for component sets that are supported
+out-of-the-box.</p>
+<p>The compset name usually has a well defined first letter followed by
+some characters that are indicative of the configuration setup. Each
+compset name has a corresponding short name. Users are not limited to
+the predefined component set combinations. A user may define their own
+component set</p>
+<div class="admonition-todo admonition" id="index-1">
+<p class="first admonition-title">Todo</p>
+<p class="last">put in link for creating your own compset into the CIME user&#8217;s guide</p>
+</div>
+<p>See <a class="reference external" href="../modelnl/compsets.html">supported component sets</a> for a
+complete list of supported compset options. Running
+<code class="docutils literal"><span class="pre">manage\_case</span></code> with the <code class="docutils literal"><span class="pre">--query-compsets_setby</span></code> option will
+also always provide a listing of the supported out-of-the-box component
+sets for the local version of CESM.</p>
+<p>In general, the first letter of a compset name indicates which
+components are used. An exception to this rule is the use of &#8220;G&#8221; as a
+second letter to indicate use of the active glc model, CISM.</p>
+</div>
+<div class="section" id="cesm-grids">
+<h2>3.3. CESM Grids<a class="headerlink" href="#cesm-grids" title="Permalink to this headline">¶</a></h2>
+<p>The grids are specified in CESM by setting an overall model resolution.
+Once the overall model resolution is set, components will read in
+appropriate grids files and the coupler will read in appropriate mapping
+weights files. Coupler mapping weights are always generated externally
+in CESM. The components will send the grid data to the coupler at
+initialization, and the coupler will check that the component grids are
+consistent with each other and with the mapping weights files.</p>
+<p>In CESM1.2, the ocean and ice must be on the same grid, but the
+atmosphere and land and river runoff can each be on different grids.
+Each component determines its own unique grid decomposition based upon
+the total number of pes assigned to that component.</p>
+<p>CESM supports several types of grids out-of-the-box including single
+point, finite volume, spectral, cubed sphere, displaced pole, and
+tripole. This page, <a class="reference external" href="http://www.image.ucar.edu/staff/rnair/remap.html">Conservative Remapping on Spherical
+Grids</a>, illustrates
+a number of these grid types. These grids are used internally by the
+models. Input datasets are usually on the same grid but in some cases,
+they can be interpolated from regular lon/lat grids in the data models.
+The finite volume and spectral grids are generally associated with
+atmosphere and land models but the data ocean and data ice models are
+also supported on those grids. The cubed sphere grid is used only by the
+active atmosphere model, cam. And the displaced pole and tripole grids
+are used by the ocean and ice models. Not every grid can be run by every
+component. The ocean and ice models run on either a Greenland dipole or
+a tripole grid. The <a class="reference external" href="gx3v7_120309_pole.png">Greenland Pole grid</a> is a
+latitude/longitude grid, with the North Pole displaced over Greenland to
+avoid singularity problems in the ocn and ice models. The low-resolution
+Greenland pole mesh from CCSM3 is illustrated in <a class="reference external" href="http://journals.ametsoc.org/doi/pdf/10.1175/JCLI3744.1">Yeager et al., &#8220;The
+Low-Resolution CCSM3&#8221;, AMS (2006), Figure 1b.,
+Web.</a>
+Similarly, the <a class="reference external" href="http://climate.lanl.gov/Models/POP/">Poseidon tripole
+grid</a> is a latitude/longitude
+grid with three poles that are all centered over land.</p>
+<p>CESM1.2 has a completely new <a class="reference external" href="#grid_names">naming convention for model
+resolutions</a>. Using this naming convention, the complete
+list of currently supported grid resolutions can be viewed at <a class="reference external" href="../modelnl/grid.html">supported
+resolutions page</a>.</p>
+</div>
+<div class="section" id="cesm-machines">
+<h2>3.4. CESM Machines<a class="headerlink" href="#cesm-machines" title="Permalink to this headline">¶</a></h2>
+<p>Scripts for supported machines and userdefined machines are provided
+with the CESM release. Supported machines have machine specific files
+and settings added to the CESM scripts and are machines that should run
+CESM cases out-of-the-box. Machines are supported in CESM on an
+individual basis and are usually listed by their common site-specific
+name. To get a machine ported and functionally supported in CESM, local
+batch, run, environment, and compiler information must be configured in
+the CESM scripts. The machine name &#8220;userdefined&#8221; machines refer to any
+machine that the user defines and requires that a user edit the
+resulting xml files to fill in information required for the target
+platform. This functionality is handy in accelerating the porting
+process and quickly getting a case running on a new platform. For more
+information on porting, see ?. The list of available machines are
+documented in <a class="reference external" href="../modelnl/machines.html">CESM supported machines</a>.
+Running <a class="reference external" href="#how_to_create_case">create_newcase</a> with the &#8220;-list&#8221;
+option will also show the list of available machines for the current
+local version of CESM. Supported machines have undergone the full CESM
+<a class="reference external" href="#port">porting process</a>. The machines available in each of these
+categories changes as access to machines change over time.</p>
+</div>
+<div class="section" id="cesm-validation">
+<h2>3.5. CESM Validation<a class="headerlink" href="#cesm-validation" title="Permalink to this headline">¶</a></h2>
+<p>Although CESM can be run out-of-the-box for a variety of resolutions,
+component combinations, and machines, MOST combinations of component
+sets, resolutions, and machines have not undergone rigorous scientific
+climate validation. Control runs accompany &#8220;scientifically supported&#8221;
+component sets and resolution and are documented on the release page.
+These control runs should be scientifically reproducible on the original
+platform or other platforms. Bit-for-bit reproducibility cannot be
+guaranteed due to variations in compiler or system versions. Users
+should carry out their own validations on any platform prior to doing
+scientific runs or scientific analysis and documentation.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="quickstart.html" title="4. Quick Start (CESM Workflow)"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="downloading_cesm.html" title="2. Downloading CESM"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cesm_quickstart  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Alice Bertini, Jim Edwards, Mariana Vertenstein.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+    </div>
+  </body>
+</html>

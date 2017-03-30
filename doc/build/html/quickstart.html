@@ -1,0 +1,201 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>4. Quick Start (CESM Workflow) &#8212; cesm_quickstart  documentation</title>
+    
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="3. CESM Configurations" href="cesm_configurations.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="cesm_configurations.html" title="3. CESM Configurations"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cesm_quickstart  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="cesm_configurations.html"
+                        title="previous chapter">3. CESM Configurations</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/quickstart.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="quick-start-cesm-workflow">
+<span id="quickstart"></span><h1>4. Quick Start (CESM Workflow)<a class="headerlink" href="#quick-start-cesm-workflow" title="Permalink to this headline">¶</a></h1>
+<p>The following quick start guide is for versions of CESM that have
+already been ported to the local target machine. If &amp;cesm has not yet
+been ported to the target machine, please see ?. If you are new to CESM,
+please consider reading the <a class="reference external" href="#ccsm_overview">introduction</a> first</p>
+<p>These definitions are required to understand this section:</p>
+<ul class="simple">
+<li>$COMPSET refers to the component set.</li>
+<li>$RES refers to the model resolution.</li>
+<li>$MACH refers to the target machine.</li>
+<li>$CIMEROOT refers to the CIME root directory.</li>
+<li>$CASE refers to the case name.</li>
+<li>$CASEROOT refers to the full pathname of the root directory where the
+case ($CASE) will be created.</li>
+<li>$EXEROOT refers to the executable directory. ($EXEROOT IS NORMALLY
+NOT THE SAME AS $&amp;CASEROOT).</li>
+<li>$RUNDIR refers to the directory where CESM actually runs. This is
+normally set to $&amp;EXEROOT/run. (Note: changing $&amp;EXEROOT does not
+change $&amp;RUNDIR as these are independent variables.)</li>
+</ul>
+<p>This is the procedure for quickly setting up and running a CESM case.</p>
+<p>Download CESM (see <a class="reference external" href="#download_ccsm">Download CESM</a>).</p>
+<p>Select a machine, a component set, and a resolution from the list
+displayed after invoking this command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>&gt; cd $CIMEROOT/scripts
+&gt; create_newcase -list
+</pre></div>
+</div>
+<p>See the <a class="reference external" href="../modelnl/compsets.html">supported component sets</a>,
+<a class="reference external" href="../modelnl/grid.html">supported model resolutions</a> and <a class="reference external" href="../modelnl/machines.html">supported
+machines</a>. for a complete list of CESM
+supported component sets, grids and computational platforms.</p>
+<p>Create a case.</p>
+<p>The CREATE_NEWCASE command creates a case directory containing the
+scripts and xml files to configure a case (see below) for the requested
+resolution, component set, and machine. CREATE_NEWCASE has several
+required arguments and if a generic machine is used, several additional
+options must be set (invoke create_newcase -h for help).</p>
+<p>If running on a supported machine, ($MACH), then invoke CREATE_NEWCASE
+as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>&gt; create_newcase -case $CASEROOT \
+         -mach $MACH \
+         -compset $COMPSET \
+         -res $RES
+</pre></div>
+</div>
+<p>If running on a new target machine, see porting in ?.</p>
+<p>Setting up the case run script</p>
+<p>Issuing the CESM_SETUP command creates a $CASEROOT/$CASE.run script
+along with user_nl_xxx files, where xxx denotes the set of components
+for the given case configuration. Before invoking CESM_SETUP, modify
+the env_mach_pes.xml file in $CASEROOT as needed for the experiment.</p>
+<p><code class="docutils literal"><span class="pre">cd</span></code> to the $CASEROOT directory.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>&gt; cd $CASEROOT
+</pre></div>
+</div>
+<p>Modify settings in ENV_MACH_PES.XML (optional). (Note: To edit any of
+the env xml files, use the <a class="reference external" href="#faq_xmlchange">xmlchange</a> command.
+invoke XMLCHANGE -h for help.)</p>
+<p>Invoke the CESM_SETUP command.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="o">./</span><span class="n">cesm_setup</span>
+</pre></div>
+</div>
+<p>Build the executable.</p>
+<p>Modify build settings in ENV_BUILD.XML (optional).</p>
+<p>Run the build script.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>&gt; $CASE.build
+</pre></div>
+</div>
+<p>Run the case.</p>
+<p>Modify runtime settings in ENV_RUN.XML (optional). In particular, set
+the $DOUT_S variable to FALSE.</p>
+<p>Submit the job to the batch queue.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>&gt; $CASE.submit
+</pre></div>
+</div>
+<p>When the job is complete, review the following directories and files</p>
+<p>$RUNDIR. This directory is set in the env_build.xml file. This is the
+location where CESM was run. There should be log files there for every
+component (ie. of the form cpl.log.yymmdd-hhmmss). Each component writes
+its own log file. Also see whether any restart or history files were
+written. To check that a run completed successfully, check the last
+several lines of the cpl.log file for the string &#8221; SUCCESSFUL
+TERMINATION OF CPL7-CCSM &#8221;.</p>
+<p>$CASEROOT/logs. The log files should have been copied into this
+directory if the run completed successfully.</p>
+<p>$CASEROOT. There could be a standard out and/or standard error file.</p>
+<p>$CASEROOT/CaseDocs. The case namelist files are copied into this
+directory from the $RUNDIR.</p>
+<p>$CASEROOT/timing. There should be a couple of timing files there that
+summarize the model performance.</p>
+<p>$DOUT_S_ROOT/$CASE. This is the archive directory. If $DOUT_S is
+FALSE, then no archive directory should exist. If $DOUT_S is TRUE, then
+log, history, and restart files should have been copied into a directory
+tree here.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="cesm_configurations.html" title="3. CESM Configurations"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cesm_quickstart  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Alice Bertini, Jim Edwards, Mariana Vertenstein.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+    </div>
+  </body>
+</html>

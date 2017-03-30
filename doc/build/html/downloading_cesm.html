@@ -1,0 +1,266 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>2. Downloading CESM &#8212; cesm_quickstart  documentation</title>
+    
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="3. CESM Configurations" href="cesm_configurations.html" />
+    <link rel="prev" title="1. Introduction" href="introduction.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="cesm_configurations.html" title="3. CESM Configurations"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="introduction.html" title="1. Introduction"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cesm_quickstart  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">2. Downloading CESM</a><ul>
+<li><a class="reference internal" href="#downloading-the-code-and-scripts">2.1. Downloading the code and scripts</a></li>
+<li><a class="reference internal" href="#downloading-input-data">2.2. Downloading input data</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="introduction.html"
+                        title="previous chapter">1. Introduction</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="cesm_configurations.html"
+                        title="next chapter">3. CESM Configurations</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/downloading_cesm.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="downloading-cesm">
+<span id="downloading"></span><h1>2. Downloading CESM<a class="headerlink" href="#downloading-cesm" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="downloading-the-code-and-scripts">
+<h2>2.1. Downloading the code and scripts<a class="headerlink" href="#downloading-the-code-and-scripts" title="Permalink to this headline">¶</a></h2>
+<p>CESM release code are available through a Subversion
+repository. Access to the code requires Subversion client software
+in place that is compatible with our Subversion server software, such
+as a recent version of the command line client, svn. Currently, our
+server software is at version 1.7.4. We recommend using a client at
+version 1.6 or later, though older versions may suffice. We cannot
+guarantee a client older than 1.4.2. For more information or to
+download open source tools, visit:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">subversion</span><span class="o">.</span><span class="n">tigris</span><span class="o">.</span><span class="n">org</span><span class="o">/</span>
+</pre></div>
+</div>
+<p>With a valid svn client installed on the machine where CESM will be
+built and run, the user may download the latest version of the release
+code. First view the available release versions with one of the
+following commands:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">svn</span> <span class="nb">list</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">svn</span><span class="o">-</span><span class="n">ccsm</span><span class="o">-</span><span class="n">models</span><span class="o">.</span><span class="n">cgd</span><span class="o">.</span><span class="n">ucar</span><span class="o">.</span><span class="n">edu</span><span class="o">/</span><span class="n">cesm2</span><span class="o">/</span><span class="n">release_tags</span>
+</pre></div>
+</div>
+<p>When contacting the Subversion server for the first time, the following
+certificate message will likely be generated:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>Error validating server certificate for
+&#39;https://svn-ccsm-models.cgd.ucar.edu:443&#39;:
+ - The certificate is not issued by a trusted authority. Use the
+   fingerprint to validate the certificate manually!
+Certificate information:
+ - Hostname: *.cgd.ucar.edu
+ - Valid: from Tue, 12 Jun 2012 00:00:00 GMT until Wed, 17 Jun 2015
+12:00:00 GMT
+ - Issuer: www.digicert.com, DigiCert Inc, US
+ - Fingerprint: eb:30:7d:c5:06:e6:b1:6f:e8:4f:c6:0a:79:6f:af:ec:5c:18:e2:32
+(R)eject, accept (t)emporarily or accept (p)ermanently? p
+</pre></div>
+</div>
+<p>After accepting the certificate, the following authentication message
+will likely be generated:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>svn list https://svn-ccsm-models.cgd.ucar.edu/cesm1/release_tags
+Authentication realm: &lt;https://svn-ccsm-models.cgd.ucar.edu:443&gt; ccsm:models
+Password for &#39;[username]&#39;:
+Authentication realm: &lt;https://svn-ccsm-models.cgd.ucar.edu:443D&gt; ccsm:models
+Username: guestuser
+Password for &#39;guestuser&#39;:
+
+-----------------------------------------------------------------------
+ATTENTION!  Your password for authentication realm:
+
+   &lt;https://svn-ccsm-models.cgd.ucar.edu:443&gt; ccsm:models
+
+can only be stored to disk unencrypted!  You are advised to configure
+your system so that Subversion can store passwords encrypted, if
+possible.  See the documentation for details.
+
+You can avoid future appearances of this warning by setting the value
+of the &#39;store-plaintext-passwords&#39; option to either &#39;yes&#39; or &#39;no&#39; in
+&#39;/glade/u/home/[username]/.subversion/servers&#39;.
+-----------------------------------------------------------------------
+Store password unencrypted (yes/no)? yes
+cesm2_0/
+</pre></div>
+</div>
+<p>Be aware that the request is set to the current machine login id and you
+must enter the CESM registered default username of &#8216;guestuser&#8217; by
+pressing the &#8216;Enter&#8217; key when prompted for a Username.</p>
+<p>You may be prompted up to 3 times for the username and password when
+checking out the code for the first time from this new Subversion path.
+This is because the code is distributed across a number of different
+Subversion repositories and each repository requires authentication.</p>
+<p>Once correctly entered, the username and password will be cached in a
+protected subdirectory of the user&#8217;s home directory so that repeated
+entry of this information will not be required for a given machine.</p>
+<p>The release tags should follow a recognizable naming pattern, and they
+can be checked out from the central source repository into a local
+sandbox directory. The following example shows how to checkout model
+version CESM2.0.0:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">svn</span> <span class="n">co</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">svn</span><span class="o">-</span><span class="n">ccsm</span><span class="o">-</span><span class="n">models</span><span class="o">.</span><span class="n">cgd</span><span class="o">.</span><span class="n">ucar</span><span class="o">.</span><span class="n">edu</span><span class="o">/</span><span class="n">cesm1</span><span class="o">/</span><span class="n">release_tags</span><span class="o">/</span><span class="n">cesm2_0_0</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>If a problem was encountered during checkout, which may happen with an older version of the client software, it may appear to have downloaded successfully, but in fact only a partial checkout has occurred. To ensure a successful download, make sure the last line of svn output has the following statement:</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="n">Checked</span> <span class="n">out</span> <span class="n">revision</span> <span class="n">XXXXX</span><span class="o">.</span>
+</pre></div>
+</div>
+</div>
+<p>This will create a directory called <code class="docutils literal"><span class="pre">cesm2_0_0</span></code> that can be used to
+modify, build, and run the model. The following Subversion subcommands
+can be executed in the working sandbox directory.</p>
+<p>For various information regarding the release version checked out...</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">svn</span> <span class="n">info</span>
+</pre></div>
+</div>
+<p>For a listing of files that have changed since checkout...</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">svn</span> <span class="n">status</span>
+</pre></div>
+</div>
+<p>For a description of the changes made to the working copy...</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">svn</span> <span class="n">diff</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="downloading-input-data">
+<h2>2.2. Downloading input data<a class="headerlink" href="#downloading-input-data" title="Permalink to this headline">¶</a></h2>
+<p>Input datasets are needed to run the model. CESM input data will be made
+available through a separate Subversion input data repository. The
+username and password for the input data repository will be the same as
+for the code repository.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The input data repository contains datasets for many configurations and resolutions and is well over 1 TByte in total size. DO NOT try to download the entire dataset.</p>
+</div>
+<p>Datasets can be downloaded on a case by case basis as needed and CESM now provides tools to check and download input data automatically.</p>
+<p>A local input data directory should exist on the local disk, and it also
+needs to be set in the CESM scripts via the variable <code class="docutils literal"><span class="pre">$DIN\_LOC\_ROOT.</span></code>
+For supported machines, this variable is preset. For generic machines,
+this variable is set as an argument to <code class="docutils literal"><span class="pre">create\_newcase</span></code>. Multiple users
+can share the same <code class="docutils literal"><span class="pre">$DIN\_LOC\_ROOT</span></code> directory.</p>
+<p>The files in the subdirectories of <code class="docutils literal"><span class="pre">$DIN\_LOC\_ROOT</span></code> should be
+write-protected. This prevents these files from being accidentally
+modified or deleted. The directories in <code class="docutils literal"><span class="pre">$DIN\_LOC\_ROOT</span></code> should generally
+be group writable, so the directory can be shared among multiple users.</p>
+<p>As part of the process of generating the CESM executable, the utility,
+<code class="docutils literal"><span class="pre">check_input_data</span></code></p>
+<div class="admonition-todo admonition" id="index-0">
+<p class="first admonition-title">Todo</p>
+<p class="last">put lin link to check_iput_data</p>
+</div>
+<p>is called, and it attempts to locate all required input data for the
+case based upon file lists generated by components. If the required
+data is not found on local disk in <code class="docutils literal"><span class="pre">$DIN\_LOC\_ROOT</span></code>, then the data
+will be downloaded automatically by the scripts or it can be
+downloaded by the user by invoking <code class="docutils literal"><span class="pre">check\_input\_data</span></code> with the -export
+command argument. If you want to download the input data manually you
+should do it before you build CESM.</p>
+<p>It is possible for users to download the data using svn subcommands
+directly, but use of the <code class="docutils literal"><span class="pre">check\_input\_data</span> <span class="pre">script</span></code> is highly recommended
+to ensure that only the required datasets are downloaded. Again, users
+are <strong>STRONGLY DISCOURAGED</strong> from downloading the entire input dataset from
+the repository due to the size.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="cesm_configurations.html" title="3. CESM Configurations"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="introduction.html" title="1. Introduction"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cesm_quickstart  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Alice Bertini, Jim Edwards, Mariana Vertenstein.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+    </div>
+  </body>
+</html>
