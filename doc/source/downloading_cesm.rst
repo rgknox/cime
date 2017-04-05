@@ -11,9 +11,8 @@ CESM release code are available through a Subversion
 repository. Access to the code requires Subversion client software
 in place that is compatible with our Subversion server software, such
 as a recent version of the command line client, svn. Currently, our
-server software is at version 1.7.4. We recommend using a client at
-version 1.6 or later, though older versions may suffice. We cannot
-guarantee a client older than 1.4.2. For more information or to
+server software is at version 1.8.17. We recommend using a client at
+version 1.8 or later, though older versions may suffice. For more information or to
 download open source tools, visit:
 
 ::
@@ -22,12 +21,12 @@ download open source tools, visit:
 
 With a valid svn client installed on the machine where CESM will be
 built and run, the user may download the latest version of the release
-code. First view the available release versions with one of the
-following commands:
+code. First view the available release versions with the
+following command:
 
 ::
 
-    > svn list https://svn-ccsm-models.cgd.ucar.edu/cesm2/release_tags
+    > svn list https://svn-ccsm-models.cgd.ucar.edu/cesm2/release/tags
 
 When contacting the Subversion server for the first time, the following
 certificate message will likely be generated:
@@ -51,7 +50,7 @@ will likely be generated:
 
 ::
 
-    svn list https://svn-ccsm-models.cgd.ucar.edu/cesm1/release_tags
+    svn list https://svn-ccsm-models.cgd.ucar.edu/cesm2/release/tags
     Authentication realm: <https://svn-ccsm-models.cgd.ucar.edu:443> ccsm:models
     Password for '[username]': 
     Authentication realm: <https://svn-ccsm-models.cgd.ucar.edu:443D> ccsm:models
@@ -69,7 +68,7 @@ will likely be generated:
 
     You can avoid future appearances of this warning by setting the value
     of the 'store-plaintext-passwords' option to either 'yes' or 'no' in
-    '/glade/u/home/[username]/.subversion/servers'.
+    '$HOME/.subversion/servers'.
     -----------------------------------------------------------------------
     Store password unencrypted (yes/no)? yes
     cesm2_0/
@@ -94,7 +93,7 @@ version CESM2.0.0:
 
 ::
 
-    > svn co https://svn-ccsm-models.cgd.ucar.edu/cesm1/release_tags/cesm2_0_0
+    > svn co https://svn-ccsm-models.cgd.ucar.edu/cesm1/release/tags/cesm2_0_0
 
 .. warning:: If a problem was encountered during checkout, which may happen with an older version of the client software, it may appear to have downloaded successfully, but in fact only a partial checkout has occurred. To ensure a successful download, make sure the last line of svn output has the following statement:
 
@@ -132,9 +131,9 @@ available through a separate Subversion input data repository. The
 username and password for the input data repository will be the same as
 for the code repository.
 
-.. warning:: The input data repository contains datasets for many configurations and resolutions and is well over 1 TByte in total size. DO NOT try to download the entire dataset.
+.. warning:: The input data repository contains datasets for many configurations and resolutions and is well over 2 TByte in total size. DO NOT try to download the entire dataset.
 
-Datasets can be downloaded on a case by case basis as needed and CESM now provides tools to check and download input data automatically.
+Datasets can be downloaded on a case by case basis as needed and CESM provides tools to check and download input data automatically.
 
 A local input data directory should exist on the local disk, and it also 
 needs to be set in the CESM scripts via the variable ``$DIN\_LOC\_ROOT.``
