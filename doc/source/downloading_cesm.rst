@@ -24,50 +24,8 @@ following command:
 
     > svn list https://svn-ccsm-models.cgd.ucar.edu/cesm2/release/tags
 
-When contacting the Subversion server for the first time, the following
-certificate message will likely be generated:
+.. warning:: When contacting the Subversion server for the first time, you may need to accept an authentication certification.
 
-::
-
-    Error validating server certificate for
-    'https://svn-ccsm-models.cgd.ucar.edu:443':
-     - The certificate is not issued by a trusted authority. Use the
-       fingerprint to validate the certificate manually!
-    Certificate information:
-     - Hostname: *.cgd.ucar.edu
-     - Valid: from Tue, 12 Jun 2012 00:00:00 GMT until Wed, 17 Jun 2015
-    12:00:00 GMT
-     - Issuer: www.digicert.com, DigiCert Inc, US
-     - Fingerprint: eb:30:7d:c5:06:e6:b1:6f:e8:4f:c6:0a:79:6f:af:ec:5c:18:e2:32
-    (R)eject, accept (t)emporarily or accept (p)ermanently? p
-
-After accepting the certificate, the following authentication message
-will likely be generated:
-
-::
-
-    svn list https://svn-ccsm-models.cgd.ucar.edu/cesm2/release/tags
-    Authentication realm: <https://svn-ccsm-models.cgd.ucar.edu:443> ccsm:models
-    Password for '[username]': 
-    Authentication realm: <https://svn-ccsm-models.cgd.ucar.edu:443D> ccsm:models
-    Username: guestuser
-    Password for 'guestuser': 
-
-    -----------------------------------------------------------------------
-    ATTENTION!  Your password for authentication realm:
-
-       <https://svn-ccsm-models.cgd.ucar.edu:443> ccsm:models
-
-    can only be stored to disk unencrypted!  You are advised to configure
-    your system so that Subversion can store passwords encrypted, if
-    possible.  See the documentation for details.
-
-    You can avoid future appearances of this warning by setting the value
-    of the 'store-plaintext-passwords' option to either 'yes' or 'no' in
-    '$HOME/.subversion/servers'.
-    -----------------------------------------------------------------------
-    Store password unencrypted (yes/no)? yes
-    cesm2_0/
 
 Be aware that the request is set to the current machine login id and you
 must enter the CESM registered default username of 'guestuser' by
@@ -85,7 +43,7 @@ entry of this information will not be required for a given machine.
 The release tags should follow a recognizable naming pattern, and they
 can be checked out from the central source repository into a local
 sandbox directory. The following example shows how to checkout model
-version CESM2.0.0:
+version CESM2_0_0:
 
 ::
 

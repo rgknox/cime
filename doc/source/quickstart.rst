@@ -15,34 +15,34 @@ If you are new to CESM2, please consider reading the
 
 These definitions are required to understand this section:
 
--  **$COMPSET** refers to the component set.
+-  ``$COMPSET`` refers to the component set.
 
--  **$RES** refers to the model resolution.
+-  ``$RES`` refers to the model resolution.
 
--  **$MACHINE** refers to the target machine.
+-  ``$MACHINE`` refers to the target machine.
 
--  **$CIMEROOT** refers to the CIME root directory.
+-  ``$CIMEROOT`` refers to the CIME root directory.
 
--  **$CASE** refers to the case name.
+-  ``$CASE`` refers to the case name.
 
--  **$CASEROOT** refers to the full pathname of the root directory where the
-   case (**$CASE**) will be created.
+-  ``$CASEROOT`` refers to the full pathname of the root directory where the
+   case (``$CASE``) will be created.
 
--  **$EXEROOT** refers to the build directory. (**$EXEROOT** IS NORMALLY
-   NOT THE SAME AS **$CASEROOT**).
+-  ``$EXEROOT`` refers to the build directory. (``$EXEROOT`` IS NORMALLY
+   NOT THE SAME AS ``$CASEROOT``).
 
--  **$RUNDIR** refers to the directory where CESM actually runs. This is
-   normally set to **$EXEROOT**/../run. (Note: changing **$EXEROOT** does not
-   change **$RUNDIR** as these are independent variables. However by default
-   they are both located under **$CIME_OUTPUT_ROOT**)
+-  ``$RUNDIR`` refers to the directory where CESM actually runs. This is
+   normally set to ``$EXEROOT``/../run. (Note: changing ``$EXEROOT`` does not
+   change ``$RUNDIR`` as these are independent variables. However by default
+   they are both located under ``$CIME_OUTPUT_ROOT``)
 
 This is the procedure for quickly setting up and running a CESM case.
 
 Download CESM  (see `Downloading CESM <downloading_cesm.html>`__).
 
 Select a component set, and a resolution for your case.  Details of available
-component sets and resolutions are available from the manage_case tool located
-in the **$CIMEROOT**/scripts directory
+component sets and resolutions are available from the manage_case_ tool located
+in the ``$CIMEROOT/scripts`` directory
 
 ::
 
@@ -56,40 +56,38 @@ supported component sets, grids and computational platforms.
 
 Create a case.
 
-The **create\_newcase** command creates a case directory containing the
+The create_newcase_ command creates a case directory containing the
 scripts and xml files to configure a case (see below) for the requested
-resolution, component set, and machine. **create\_newcase** has several
-required arguments (invoke **create\_newcase --help** for help).
+resolution, component set, and machine. **create_newcase** has several
+required arguments (invoke **create_newcase --help** for help).
 
-If running on a supported machine, (**$MACHINE**), that machine will normally be recognized
+If running on a supported machine, (``$MACHINE``), that machine will normally be recognized
 automatically and therefore it is not required to specify the --machine argument to **create_newcase**
-then invoke **create\_newcase**
+then invoke **create_newcase**
 as follows:
 
 ::
 
-    > create_newcase --case $CASEROOT \
-             --compset $COMPSET \
-             --res $RES 
+    > create_newcase --case $CASEROOT --compset $COMPSET --res $RES 
 
 If running on a new target machine, see
 `the CIME porting guide <http://esmci.github.io/cime/doc/build/html/users_guide/index.html#users-guide2>`_.
 
 Setting up the case run script
 
-Issuing the **case.setup** command creates a **$CASEROOT/case.run** script
-along with user\_nl\_xxx files, where xxx denotes the set of components
+Issuing the case.setup_ command creates a ``$CASEROOT/case.run`` script
+along with user_nl_xxx files, where xxx denotes the set of components
 for the given case configuration. Before invoking **case.setup**, modify
-the env\_mach\_pes.xml file in $CASEROOT using the xmlchange command
+the ``env_mach_pes.xml`` file in $CASEROOT using the xmlchange_ command
 as needed for the experiment.
 
-``cd`` to the $CASEROOT directory.
+cd to the ``$CASEROOT`` directory.
 
 ::
 
     > cd $CASEROOT
 
-Modify settings in **env\_mach\_pes.xml** (optional). (Note: To edit any of
+Modify settings in ``env_mach_pes.xml`` (optional). (Note: To edit any of
 the env xml files, use the **xmlchange** command.
 invoke **xmlchange --help** for help.)
 
@@ -101,7 +99,7 @@ Invoke the **case.setup** command.
 
 Build the executable using the case.build command.
 
-Modify build settings in **env\_build.xml** (optional).
+Modify build settings in ``env_build.xml`` (optional).
 
 Run the build script.
 
@@ -111,8 +109,8 @@ Run the build script.
 
 Run the case.
 
-Modify runtime settings in **env\_run.xml** (optional). In particular, set
-the $DOUT\_S variable to FALSE to turn off short term archiving.
+Modify runtime settings in ``env_run.xml`` (optional). In particular, set
+the ``$DOUT_S`` variable to FALSE to turn off short term archiving.
 
 Submit the job to the batch queue using the **case.submit** command.
 
@@ -122,7 +120,7 @@ Submit the job to the batch queue using the **case.submit** command.
 
 When the job is complete, review the following directories and files
 
-**$RUNDIR**. This directory is set in the **env\_build.xml** file. This is the
+``$RUNDIR``. This directory is set in the ``env_build.xml`` file. This is the
 location where CESM was run. There should be log files there for every
 component (ie. of the form cpl.log.yymmdd-hhmmss). Each component writes
 its own log file. Also see whether any restart or history files were
@@ -130,18 +128,29 @@ written. To check that a run completed successfully, check the last
 several lines of the cpl.log file for the string " SUCCESSFUL
 TERMINATION OF CPL7-CCSM ".
 
-**$CASEROOT/logs**. The log files should have been copied into this
-directory if the run completed successfully.
+- ``$CASEROOT/logs``
 
-**$CASEROOT**. There could be standard out and/or standard error files output from the batch system.
+  The log files should have been copied into this directory if the run completed successfully.
 
-**$CASEROOT/CaseDocs**. The case namelist files are copied into this
-directory from the **$RUNDIR**.
+- ``$CASEROOT``
 
-**$CASEROOT/timing**. There should be a couple of timing files there that
-summarize the model performance.
+  There could be standard out and/or standard error files output from the batch system.
 
-**$DOUT\_S\_ROOT/$CASE**. This is the archive directory. If **$DOUT\_S** is
-FALSE, then no archive directory should exist. If **$DOUT\_S** is TRUE, then
-log, history, and restart files should have been copied into a directory
-tree here.
+- ``$CASEROOT/CaseDocs``
+  The case namelist files are copied into this directory from the ``$RUNDIR``.
+
+- ``$CASEROOT/timing``
+
+  There should be a couple of timing files there that summarize the model performance.
+
+- ``$DOUT_S_ROOT/$CASE``
+
+  This is the short term archive directory. If ``$DOUT_S`` is
+  FALSE, then no archive directory should exist. If ``$DOUT_S`` is TRUE, then
+  log, history, and restart files should have been copied into a directory
+  tree here.
+
+.. _manage_case: http://esmci.github.io/cime/doc/build/html/users_guide/case-basics.html#querying-cime-calling-manage-case
+.. _create_newcase: http://esmci.github.io/cime/doc/build/html/users_guide/create-a-case.html#calling-create-newcase
+.. _xmlchange: http://esmci.github.io/cime/doc/build/html/users_guide/customizing-a-case.html#modifying-an-xml-file
+.. _case.setup: http://esmci.github.io/cime/doc/build/html/users_guide/setting-up-a-case.html#calling-case-setup
