@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>4. Quick Start (CESM Workflow) &#8212; cesm_quickstart  documentation</title>
+    <title>4. Quick Start (CESM2 Model Workflow) &#8212; cesm_quickstart  documentation</title>
     
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -77,100 +77,108 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="quick-start-cesm-workflow">
-<span id="quickstart"></span><h1>4. Quick Start (CESM Workflow)<a class="headerlink" href="#quick-start-cesm-workflow" title="Permalink to this headline">¶</a></h1>
-<p>The following quick start guide is for versions of CESM that have
-already been ported to the local target machine. If &amp;cesm has not yet
-been ported to the target machine, please see ?. If you are new to CESM,
-please consider reading the <a class="reference external" href="#ccsm_overview">introduction</a> first</p>
+  <div class="section" id="quick-start-cesm2-model-workflow">
+<span id="quickstart"></span><h1>4. Quick Start (CESM2 Model Workflow)<a class="headerlink" href="#quick-start-cesm2-model-workflow" title="Permalink to this headline">¶</a></h1>
+<p>The following quick start guide is for versions of CESM2 that have
+already been ported to the local target machine.  CESM2 is built on the
+CIME (Common Infrastructure for Modeling Earth) framework.
+If CIME has not yet
+been ported to the target machine, please see
+<a class="reference external" href="http://esmci.github.io/cime/doc/build/html/users_guide/index.html#users-guide2">the CIME porting guide</a>.
+If you are new to CESM2, please consider reading the
+<a class="reference external" href="https://esmci.github.io/cime/doc/build/html/users_guide/index.html">CIME Basic Usage guide</a> first</p>
 <p>These definitions are required to understand this section:</p>
 <ul class="simple">
-<li>$COMPSET refers to the component set.</li>
-<li>$RES refers to the model resolution.</li>
-<li>$MACH refers to the target machine.</li>
-<li>$CIMEROOT refers to the CIME root directory.</li>
-<li>$CASE refers to the case name.</li>
-<li>$CASEROOT refers to the full pathname of the root directory where the
-case ($CASE) will be created.</li>
-<li>$EXEROOT refers to the executable directory. ($EXEROOT IS NORMALLY
-NOT THE SAME AS $&amp;CASEROOT).</li>
-<li>$RUNDIR refers to the directory where CESM actually runs. This is
-normally set to $&amp;EXEROOT/run. (Note: changing $&amp;EXEROOT does not
-change $&amp;RUNDIR as these are independent variables.)</li>
+<li><strong>$COMPSET</strong> refers to the component set.</li>
+<li><strong>$RES</strong> refers to the model resolution.</li>
+<li><strong>$MACHINE</strong> refers to the target machine.</li>
+<li><strong>$CIMEROOT</strong> refers to the CIME root directory.</li>
+<li><strong>$CASE</strong> refers to the case name.</li>
+<li><strong>$CASEROOT</strong> refers to the full pathname of the root directory where the
+case (<strong>$CASE</strong>) will be created.</li>
+<li><strong>$EXEROOT</strong> refers to the build directory. (<strong>$EXEROOT</strong> IS NORMALLY
+NOT THE SAME AS <strong>$CASEROOT</strong>).</li>
+<li><strong>$RUNDIR</strong> refers to the directory where CESM actually runs. This is
+normally set to <strong>$EXEROOT</strong>/../run. (Note: changing <strong>$EXEROOT</strong> does not
+change <strong>$RUNDIR</strong> as these are independent variables. However by default
+they are both located under <strong>$CIME_OUTPUT_ROOT</strong>)</li>
 </ul>
 <p>This is the procedure for quickly setting up and running a CESM case.</p>
-<p>Download CESM (see <a class="reference external" href="#download_ccsm">Download CESM</a>).</p>
-<p>Select a machine, a component set, and a resolution from the list
-displayed after invoking this command:</p>
+<p>Download CESM  (see <a class="reference external" href="downloading_cesm.html">Downloading CESM</a>).</p>
+<p>Select a component set, and a resolution for your case.  Details of available
+component sets and resolutions are available from the manage_case tool located
+in the <strong>$CIMEROOT</strong>/scripts directory</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>&gt; cd $CIMEROOT/scripts
-&gt; create_newcase -list
+&gt; manage_case --help
 </pre></div>
 </div>
-<p>See the <a class="reference external" href="../modelnl/compsets.html">supported component sets</a>,
-<a class="reference external" href="../modelnl/grid.html">supported model resolutions</a> and <a class="reference external" href="../modelnl/machines.html">supported
+<p>See the <a class="reference external" href="http://www.cesm.ucar.edu/models/cesm2.0/cesm/compsets.html">supported component sets</a>,
+<a class="reference external" href="http://www.cesm.ucar.edu/models/cesm2.0/cesm/grids.html">supported model resolutions</a> and <a class="reference external" href="http://www.cesm.ucar.edu/models/cesm2.0/cesm/machines.html">supported
 machines</a>. for a complete list of CESM
 supported component sets, grids and computational platforms.</p>
 <p>Create a case.</p>
-<p>The CREATE_NEWCASE command creates a case directory containing the
+<p>The <strong>create_newcase</strong> command creates a case directory containing the
 scripts and xml files to configure a case (see below) for the requested
-resolution, component set, and machine. CREATE_NEWCASE has several
-required arguments and if a generic machine is used, several additional
-options must be set (invoke create_newcase -h for help).</p>
-<p>If running on a supported machine, ($MACH), then invoke CREATE_NEWCASE
+resolution, component set, and machine. <strong>create_newcase</strong> has several
+required arguments (invoke <strong>create_newcase &#8211;help</strong> for help).</p>
+<p>If running on a supported machine, (<strong>$MACHINE</strong>), that machine will normally be recognized
+automatically and therefore it is not required to specify the &#8211;machine argument to <strong>create_newcase</strong>
+then invoke <strong>create_newcase</strong>
 as follows:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>&gt; create_newcase -case $CASEROOT \
-         -mach $MACH \
-         -compset $COMPSET \
-         -res $RES
+<div class="highlight-default"><div class="highlight"><pre><span></span>&gt; create_newcase --case $CASEROOT \
+         --compset $COMPSET \
+         --res $RES
 </pre></div>
 </div>
-<p>If running on a new target machine, see porting in ?.</p>
+<p>If running on a new target machine, see
+<a class="reference external" href="http://esmci.github.io/cime/doc/build/html/users_guide/index.html#users-guide2">the CIME porting guide</a>.</p>
 <p>Setting up the case run script</p>
-<p>Issuing the CESM_SETUP command creates a $CASEROOT/$CASE.run script
+<p>Issuing the <strong>case.setup</strong> command creates a <strong>$CASEROOT/case.run</strong> script
 along with user_nl_xxx files, where xxx denotes the set of components
-for the given case configuration. Before invoking CESM_SETUP, modify
-the env_mach_pes.xml file in $CASEROOT as needed for the experiment.</p>
+for the given case configuration. Before invoking <strong>case.setup</strong>, modify
+the env_mach_pes.xml file in $CASEROOT using the xmlchange command
+as needed for the experiment.</p>
 <p><code class="docutils literal"><span class="pre">cd</span></code> to the $CASEROOT directory.</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>&gt; cd $CASEROOT
 </pre></div>
 </div>
-<p>Modify settings in ENV_MACH_PES.XML (optional). (Note: To edit any of
-the env xml files, use the <a class="reference external" href="#faq_xmlchange">xmlchange</a> command.
-invoke XMLCHANGE -h for help.)</p>
-<p>Invoke the CESM_SETUP command.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="o">./</span><span class="n">cesm_setup</span>
+<p>Modify settings in <strong>env_mach_pes.xml</strong> (optional). (Note: To edit any of
+the env xml files, use the <strong>xmlchange</strong> command.
+invoke <strong>xmlchange &#8211;help</strong> for help.)</p>
+<p>Invoke the <strong>case.setup</strong> command.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="o">./</span><span class="n">case</span><span class="o">.</span><span class="n">setup</span>
 </pre></div>
 </div>
-<p>Build the executable.</p>
-<p>Modify build settings in ENV_BUILD.XML (optional).</p>
+<p>Build the executable using the case.build command.</p>
+<p>Modify build settings in <strong>env_build.xml</strong> (optional).</p>
 <p>Run the build script.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>&gt; $CASE.build
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">case</span><span class="o">.</span><span class="n">build</span>
 </pre></div>
 </div>
 <p>Run the case.</p>
-<p>Modify runtime settings in ENV_RUN.XML (optional). In particular, set
-the $DOUT_S variable to FALSE.</p>
-<p>Submit the job to the batch queue.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>&gt; $CASE.submit
+<p>Modify runtime settings in <strong>env_run.xml</strong> (optional). In particular, set
+the $DOUT_S variable to FALSE to turn off short term archiving.</p>
+<p>Submit the job to the batch queue using the <strong>case.submit</strong> command.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">case</span><span class="o">.</span><span class="n">submit</span>
 </pre></div>
 </div>
 <p>When the job is complete, review the following directories and files</p>
-<p>$RUNDIR. This directory is set in the env_build.xml file. This is the
+<p><strong>$RUNDIR</strong>. This directory is set in the <strong>env_build.xml</strong> file. This is the
 location where CESM was run. There should be log files there for every
 component (ie. of the form cpl.log.yymmdd-hhmmss). Each component writes
 its own log file. Also see whether any restart or history files were
 written. To check that a run completed successfully, check the last
 several lines of the cpl.log file for the string &#8221; SUCCESSFUL
 TERMINATION OF CPL7-CCSM &#8221;.</p>
-<p>$CASEROOT/logs. The log files should have been copied into this
+<p><strong>$CASEROOT/logs</strong>. The log files should have been copied into this
 directory if the run completed successfully.</p>
-<p>$CASEROOT. There could be a standard out and/or standard error file.</p>
-<p>$CASEROOT/CaseDocs. The case namelist files are copied into this
-directory from the $RUNDIR.</p>
-<p>$CASEROOT/timing. There should be a couple of timing files there that
+<p><strong>$CASEROOT</strong>. There could be standard out and/or standard error files output from the batch system.</p>
+<p><strong>$CASEROOT/CaseDocs</strong>. The case namelist files are copied into this
+directory from the <strong>$RUNDIR</strong>.</p>
+<p><strong>$CASEROOT/timing</strong>. There should be a couple of timing files there that
 summarize the model performance.</p>
-<p>$DOUT_S_ROOT/$CASE. This is the archive directory. If $DOUT_S is
-FALSE, then no archive directory should exist. If $DOUT_S is TRUE, then
+<p><strong>$DOUT_S_ROOT/$CASE</strong>. This is the archive directory. If <strong>$DOUT_S</strong> is
+FALSE, then no archive directory should exist. If <strong>$DOUT_S</strong> is TRUE, then
 log, history, and restart files should have been copied into a directory
 tree here.</p>
 </div>
@@ -195,7 +203,7 @@ tree here.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, Alice Bertini, Jim Edwards, Mariana Vertenstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
     </div>
   </body>
 </html>

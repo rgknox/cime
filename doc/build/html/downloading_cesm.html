@@ -97,22 +97,18 @@
 <span id="downloading"></span><h1>2. Downloading CESM<a class="headerlink" href="#downloading-cesm" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="downloading-the-code-and-scripts">
 <h2>2.1. Downloading the code and scripts<a class="headerlink" href="#downloading-the-code-and-scripts" title="Permalink to this headline">¶</a></h2>
-<p>CESM release code are available through a Subversion
+<p>CESM releases are available through a Subversion
 repository. Access to the code requires Subversion client software
 in place that is compatible with our Subversion server software, such
 as a recent version of the command line client, svn. Currently, our
-server software is at version 1.7.4. We recommend using a client at
-version 1.6 or later, though older versions may suffice. We cannot
-guarantee a client older than 1.4.2. For more information or to
-download open source tools, visit:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">subversion</span><span class="o">.</span><span class="n">tigris</span><span class="o">.</span><span class="n">org</span><span class="o">/</span>
-</pre></div>
-</div>
+server software is at version 1.8.17. We recommend using a client at
+version 1.8 or later, though older versions may suffice. For more information or to
+download open source tools, visit <a class="reference external" href="http://subversion.tigris.org/">Subversion</a>.</p>
 <p>With a valid svn client installed on the machine where CESM will be
 built and run, the user may download the latest version of the release
-code. First view the available release versions with one of the
-following commands:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">svn</span> <span class="nb">list</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">svn</span><span class="o">-</span><span class="n">ccsm</span><span class="o">-</span><span class="n">models</span><span class="o">.</span><span class="n">cgd</span><span class="o">.</span><span class="n">ucar</span><span class="o">.</span><span class="n">edu</span><span class="o">/</span><span class="n">cesm2</span><span class="o">/</span><span class="n">release_tags</span>
+code. First view the available release versions with the
+following command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">svn</span> <span class="nb">list</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">svn</span><span class="o">-</span><span class="n">ccsm</span><span class="o">-</span><span class="n">models</span><span class="o">.</span><span class="n">cgd</span><span class="o">.</span><span class="n">ucar</span><span class="o">.</span><span class="n">edu</span><span class="o">/</span><span class="n">cesm2</span><span class="o">/</span><span class="n">release</span><span class="o">/</span><span class="n">tags</span>
 </pre></div>
 </div>
 <p>When contacting the Subversion server for the first time, the following
@@ -132,7 +128,7 @@ Certificate information:
 </div>
 <p>After accepting the certificate, the following authentication message
 will likely be generated:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>svn list https://svn-ccsm-models.cgd.ucar.edu/cesm1/release_tags
+<div class="highlight-default"><div class="highlight"><pre><span></span>svn list https://svn-ccsm-models.cgd.ucar.edu/cesm2/release/tags
 Authentication realm: &lt;https://svn-ccsm-models.cgd.ucar.edu:443&gt; ccsm:models
 Password for &#39;[username]&#39;:
 Authentication realm: &lt;https://svn-ccsm-models.cgd.ucar.edu:443D&gt; ccsm:models
@@ -150,7 +146,7 @@ possible.  See the documentation for details.
 
 You can avoid future appearances of this warning by setting the value
 of the &#39;store-plaintext-passwords&#39; option to either &#39;yes&#39; or &#39;no&#39; in
-&#39;/glade/u/home/[username]/.subversion/servers&#39;.
+&#39;$HOME/.subversion/servers&#39;.
 -----------------------------------------------------------------------
 Store password unencrypted (yes/no)? yes
 cesm2_0/
@@ -170,7 +166,7 @@ entry of this information will not be required for a given machine.</p>
 can be checked out from the central source repository into a local
 sandbox directory. The following example shows how to checkout model
 version CESM2.0.0:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">svn</span> <span class="n">co</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">svn</span><span class="o">-</span><span class="n">ccsm</span><span class="o">-</span><span class="n">models</span><span class="o">.</span><span class="n">cgd</span><span class="o">.</span><span class="n">ucar</span><span class="o">.</span><span class="n">edu</span><span class="o">/</span><span class="n">cesm1</span><span class="o">/</span><span class="n">release_tags</span><span class="o">/</span><span class="n">cesm2_0_0</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">svn</span> <span class="n">co</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">svn</span><span class="o">-</span><span class="n">ccsm</span><span class="o">-</span><span class="n">models</span><span class="o">.</span><span class="n">cgd</span><span class="o">.</span><span class="n">ucar</span><span class="o">.</span><span class="n">edu</span><span class="o">/</span><span class="n">cesm2</span><span class="o">/</span><span class="n">release</span><span class="o">/</span><span class="n">tags</span><span class="o">/</span><span class="n">cesm2_0_0</span>
 </pre></div>
 </div>
 <div class="admonition warning">
@@ -204,36 +200,32 @@ username and password for the input data repository will be the same as
 for the code repository.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">The input data repository contains datasets for many configurations and resolutions and is well over 1 TByte in total size. DO NOT try to download the entire dataset.</p>
+<p class="last">The input data repository contains datasets for many configurations and resolutions and is well over 2 TByte in total size. DO NOT try to download the entire dataset.</p>
 </div>
-<p>Datasets can be downloaded on a case by case basis as needed and CESM now provides tools to check and download input data automatically.</p>
+<p>Datasets can be downloaded on a case by case basis as needed and CESM provides tools to check and download input data automatically.</p>
 <p>A local input data directory should exist on the local disk, and it also
 needs to be set in the CESM scripts via the variable <code class="docutils literal"><span class="pre">$DIN\_LOC\_ROOT.</span></code>
 For supported machines, this variable is preset. For generic machines,
-this variable is set as an argument to <code class="docutils literal"><span class="pre">create\_newcase</span></code>. Multiple users
-can share the same <code class="docutils literal"><span class="pre">$DIN\_LOC\_ROOT</span></code> directory.</p>
+this variable is set as an argument to <code class="docutils literal"><span class="pre">create\_newcase</span></code>. It is recommended that all users
+of a given filesystem share the same <code class="docutils literal"><span class="pre">$DIN\_LOC\_ROOT</span></code> directory.</p>
 <p>The files in the subdirectories of <code class="docutils literal"><span class="pre">$DIN\_LOC\_ROOT</span></code> should be
 write-protected. This prevents these files from being accidentally
 modified or deleted. The directories in <code class="docutils literal"><span class="pre">$DIN\_LOC\_ROOT</span></code> should generally
 be group writable, so the directory can be shared among multiple users.</p>
 <p>As part of the process of generating the CESM executable, the utility,
-<code class="docutils literal"><span class="pre">check_input_data</span></code></p>
-<div class="admonition-todo admonition" id="index-0">
-<p class="first admonition-title">Todo</p>
-<p class="last">put lin link to check_iput_data</p>
-</div>
-<p>is called, and it attempts to locate all required input data for the
+<code class="docutils literal"><span class="pre">check_input_data</span></code>  located in each case directory
+is called, and it attempts to locate all required input data for the
 case based upon file lists generated by components. If the required
 data is not found on local disk in <code class="docutils literal"><span class="pre">$DIN\_LOC\_ROOT</span></code>, then the data
 will be downloaded automatically by the scripts or it can be
-downloaded by the user by invoking <code class="docutils literal"><span class="pre">check\_input\_data</span></code> with the -export
+downloaded by the user by invoking <code class="docutils literal"><span class="pre">check\_input\_data</span></code> with the &#8211;download
 command argument. If you want to download the input data manually you
 should do it before you build CESM.</p>
 <p>It is possible for users to download the data using svn subcommands
 directly, but use of the <code class="docutils literal"><span class="pre">check\_input\_data</span> <span class="pre">script</span></code> is highly recommended
 to ensure that only the required datasets are downloaded. Again, users
 are <strong>STRONGLY DISCOURAGED</strong> from downloading the entire input dataset from
-the repository due to the size.</p>
+the repository.</p>
 </div>
 </div>
 
@@ -260,7 +252,7 @@ the repository due to the size.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, Alice Bertini, Jim Edwards, Mariana Vertenstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
     </div>
   </body>
 </html>
