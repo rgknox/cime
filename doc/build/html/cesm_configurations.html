@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>3. CESM Configurations &#8212; cesm_quickstart  documentation</title>
+    <title>3. CESM2 Configurations &#8212; cesm_quickstart  documentation</title>
     
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -28,7 +28,7 @@
     <script type="text/javascript" src="_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="4. Quick Start (CIME Model Workflow)" href="quickstart.html" />
+    <link rel="next" title="4. Quick Start (CESM2 Model Workflow)" href="quickstart.html" />
     <link rel="prev" title="2. Downloading CESM" href="downloading_cesm.html" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <!--[if lt IE 9]>
@@ -43,7 +43,7 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="quickstart.html" title="4. Quick Start (CIME Model Workflow)"
+          <a href="quickstart.html" title="4. Quick Start (CESM2 Model Workflow)"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="downloading_cesm.html" title="2. Downloading CESM"
@@ -55,7 +55,7 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">3. CESM Configurations</a><ul>
+<li><a class="reference internal" href="#">3. CESM2 Configurations</a><ul>
 <li><a class="reference internal" href="#cesm-components">3.1. CESM Components</a></li>
 <li><a class="reference internal" href="#cesm-component-sets">3.2. CESM Component Sets</a></li>
 <li><a class="reference internal" href="#cesm-grids">3.3. CESM Grids</a></li>
@@ -70,7 +70,7 @@
                         title="previous chapter">2. Downloading CESM</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="quickstart.html"
-                        title="next chapter">4. Quick Start (CIME Model Workflow)</a></p>
+                        title="next chapter">4. Quick Start (CESM2 Model Workflow)</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -96,18 +96,15 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="cesm-configurations">
-<span id="configurations"></span><h1>3. CESM Configurations<a class="headerlink" href="#cesm-configurations" title="Permalink to this headline">¶</a></h1>
-<p>The CESM system can be configured a number of different ways from both a
+  <div class="section" id="cesm2-configurations">
+<span id="configurations"></span><h1>3. CESM2 Configurations<a class="headerlink" href="#cesm2-configurations" title="Permalink to this headline">¶</a></h1>
+<p>The CESM2 system can be configured a number of different ways from both a
 science and technical perspective. CESM supports numerous
-<a class="reference external" href="../modelnl/grid.html">resolutions</a>, and
-<a class="reference external" href="../modelnl/compsets.html">component configurations</a>. In addition, each model
+<a class="reference external" href="http://www.cesm.ucar.edu/models/cesm2.0/cesm/grids.html">resolutions</a>, and
+<a class="reference external" href="http://www.cesm.ucar.edu/models/cesm2.0/cesm/compsets.html">component sets</a>.
+In addition, each model
 component has input options to configure specific model physics and
 parameterizations.</p>
-<div class="admonition-todo admonition" id="index-0">
-<p class="first admonition-title">Todo</p>
-<p class="last">put lin linkk to model grids, compsets and model namelists.</p>
-</div>
 <div class="section" id="cesm-components">
 <h2>3.1. CESM Components<a class="headerlink" href="#cesm-components" title="Permalink to this headline">¶</a></h2>
 <p>CESM consists of seven geophysical model components:</p>
@@ -118,17 +115,17 @@ parameterizations.</p>
 <li>river (rof)</li>
 <li>ocean (ocn),</li>
 <li>land-ice (glc)</li>
-<li>ocean-wave</li>
+<li>ocean-wave (wav)</li>
 </ul>
 <p>In addition CESM is accompanied by a driver/coupler (cpl7) that
 coordinates the time evolution of geophysical components and
-periocially permits the components to exchange data.  In addition to
-the prognostic model components, each model component may also have an
-&#8220;active,&#8221; &#8220;data,&#8221; &#8220;dead,&#8221; or &#8220;stub&#8221; version that permits the whole
+periocially permits the components to exchange data.  Each component is
+represented in one of several modes:
+&#8220;active,&#8221; &#8220;data,&#8221; &#8220;dead,&#8221; or &#8220;stub&#8221; that permits the whole
 system to activate and deactive component feedbacks by allowing for a
 variety of &#8220;plug and play&#8221; combinations.</p>
 <p>During the course of a CESM run, the model components integrate forward
-in time, periodically stopping to exchange information with the coupler.
+in time, periodically exchanging information with the coupler.
 The coupler meanwhile receives fields from the component models,
 computes, maps, and merges this information, then sends the fields back
 to the component models. The coupler brokers this sequence of
@@ -136,7 +133,7 @@ communication interchanges and manages the overall time progression of
 the coupled system. A CESM component set is comprised of seven
 components: one component from each model (atm, lnd, rof, ocn, ice, glc,
 and wav) plus the coupler. Model components are written primarily in
-Fortran 90/95/2003.</p>
+Fortran.</p>
 <p>The active (dynamical) components are generally fully prognostic, and
 they are state-of-the-art climate prediction and analysis tools. Because
 the active models are relatively expensive to run, data models that
@@ -172,7 +169,7 @@ so ice, ocn, and glc stubs are used).</p>
 <td>atm</td>
 <td>cam</td>
 <td>active</td>
-<td>The Community Atmosphere Model (CAM) is a global atmospheric general circulation model developed from the NCAR CCM3.</td>
+<td>The <a class="reference external" href="http://www.cesm.ucar.edu/models/cesm2.0/atmosphere/">Community Atmosphere Model (CAM)</a> is a global atmospheric general circulation model developed from the NCAR CCM3.</td>
 </tr>
 <tr class="row-odd"><td>atmosphere</td>
 <td>atm</td>
@@ -196,7 +193,7 @@ so ice, ocn, and glc stubs are used).</p>
 <td>lnd</td>
 <td>clm</td>
 <td>active</td>
-<td>The Community Land Model (CLM) is the result of a collaborative project between scientists in the Terrestrial Sciences Section of the Climate and Global Dynamics Division (CGD) at NCAR and the CESM Land Model Working Group. Other principal working groups that also contribute to the CLM are Biogeochemistry, Paleoclimate, and Climate Change and Assessment.</td>
+<td>The <a class="reference external" href="http://www.cesm.ucar.edu/models/cesm2.0/land/">Community Land Model (CLM)</a> is the result of a collaborative project between scientists in the Terrestrial Sciences Section of the Climate and Global Dynamics Division (CGD) at NCAR and the CESM Land Model Working Group. Other principal working groups that also contribute to the CLM are Biogeochemistry, Paleoclimate, and Climate Change and Assessment.</td>
 </tr>
 <tr class="row-odd"><td>land</td>
 <td>lnd</td>
@@ -220,13 +217,13 @@ so ice, ocn, and glc stubs are used).</p>
 <td>rof</td>
 <td>rtm</td>
 <td>active</td>
-<td>The river transport model (RTM) was previously part of CLM and was developed to route total runoff from the land surface model to either the active ocean or marginal seas which enables the hydrologic cycle to be closed (Branstetter 2001, Branstetter and Famiglietti 1999). This is needed to model ocean convection and circulation, which is affected by freshwater input.</td>
+<td>The <a class="reference external" href="http://www.cesm.ucar.edu/models/cesm2.0/river/">river transport model (RTM)</a> was previously part of CLM and was developed to route total runoff from the land surface model to either the active ocean or marginal seas which enables the hydrologic cycle to be closed (Branstetter 2001, Branstetter and Famiglietti 1999). This is needed to model ocean convection and circulation, which is affected by freshwater input.</td>
 </tr>
 <tr class="row-odd"><td>river</td>
 <td>rof</td>
 <td>mosart</td>
 <td>active</td>
-<td>TODO: put in a description of mosart</td>
+<td><a class="reference external" href="http://www.cesm.ucar.edu/models/cesm2.0/river/">MOdel for Scale Adaptive River Transport (MOSART)</a> , a new large-scale river routing model. MOSART improves the magnitude and timing of river flow simulations.</td>
 </tr>
 <tr class="row-even"><td>river</td>
 <td>rof&#8221;</td>
@@ -250,7 +247,7 @@ so ice, ocn, and glc stubs are used).</p>
 <td>ocn&#8221;</td>
 <td>pop</td>
 <td>active</td>
-<td>The ocean model is an extension of the Parallel Ocean Program (POP) Version 2 from Los Alamos National Laboratory (LANL).</td>
+<td>The ocean model is an extension of the <a class="reference external" href="http://www.cesm.ucar.edu/models/cesm2.0/ocean/">Parallel Ocean Program (POP)</a> Version 2 from Los Alamos National Laboratory (LANL).</td>
 </tr>
 <tr class="row-even"><td>ocean</td>
 <td>ocn&#8221;</td>
@@ -274,7 +271,7 @@ so ice, ocn, and glc stubs are used).</p>
 <td>ice&#8221;</td>
 <td>cice&#8221;</td>
 <td>active&#8221;</td>
-<td>The sea-ice component (CICE) is an extension of the Los Alamos National Laboratory (LANL) sea-ice model and was developed though collaboration within the CESM Polar Climate Working Group (PCWG). In CESM, CICE can run as a fully prognostic component or in prescribed mode where ice coverage (normally climatological) is read in.</td>
+<td>The <a class="reference external" href="http://www.cesm.ucar.edu/models/cesm2.0/sea-ice/">sea-ice component (CICE)</a> is an extension of the Los Alamos National Laboratory (LANL) sea-ice model and was developed though collaboration within the CESM Polar Climate Working Group (PCWG). In CESM, CICE can run as a fully prognostic component or in prescribed mode where ice coverage (normally climatological) is read in.</td>
 </tr>
 <tr class="row-even"><td>sea-ice</td>
 <td>ice&#8221;</td>
@@ -298,7 +295,7 @@ so ice, ocn, and glc stubs are used).</p>
 <td>glc&#8221;</td>
 <td>cism</td>
 <td>active&#8221;</td>
-<td>The CISM component is an extension of the Glimmer ice sheet model.</td>
+<td>The <a class="reference external" href="http://www.cesm.ucar.edu/models/cesm2.0/land-ice/">CISM component</a> is an extension of the Glimmer ice sheet model.</td>
 </tr>
 <tr class="row-even"><td>land-ice</td>
 <td>glc&#8221;</td>
@@ -328,7 +325,7 @@ so ice, ocn, and glc stubs are used).</p>
 <td>cpl&#8221;</td>
 <td>cpl&#8221;</td>
 <td>active</td>
-<td>The CESM coupler was built primarily through a collaboration of the NCAR CESM Software Engineering Group and the Argonne National Laboratory (ANL). The MCT coupling library provides much of the infrastructure.</td>
+<td>The <a class="reference external" href="http://esmci.github.io/cime/doc/build/html/driver_cpl/index.html#driver-cpl">CESM coupler</a> was built primarily through a collaboration of the NCAR CESM Software Engineering Group and the Argonne National Laboratory (ANL). The MCT coupling library provides much of the infrastructure.</td>
 </tr>
 </tbody>
 </table>
@@ -346,7 +343,7 @@ some characters that are indicative of the configuration setup. Each
 compset name has a corresponding short name. Users are not limited to
 the predefined component set combinations. A user may define their own
 component set</p>
-<div class="admonition-todo admonition" id="index-1">
+<div class="admonition-todo admonition" id="index-0">
 <p class="first admonition-title">Todo</p>
 <p class="last">put in link for creating your own compset into the CIME user&#8217;s guide</p>
 </div>
@@ -449,7 +446,7 @@ scientific runs or scientific analysis and documentation.</p>
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="quickstart.html" title="4. Quick Start (CIME Model Workflow)"
+          <a href="quickstart.html" title="4. Quick Start (CESM2 Model Workflow)"
              >next</a> |</li>
         <li class="right" >
           <a href="downloading_cesm.html" title="2. Downloading CESM"
