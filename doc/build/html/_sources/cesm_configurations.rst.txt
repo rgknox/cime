@@ -180,10 +180,10 @@ process and quickly getting a case running on a new platform. For more
 information on porting, see the
 `cime porting guide <http://esmci.github.io/cime/doc/build/html/users_guide/index.html#cime-user-s-guide-part-2-cime-internals-porting-and-testing>`_.  The list of available machines are
 documented in `CESM supported machines <>`__.
-Running `create\_newcase <>`__ with the "-list"
+Running **create_newcase** with the "-list"
 option will also show the list of available machines for the current
 local version of CESM. Supported machines have undergone the full CESM
-`porting process <#port>`__. The machines available in each of these
+porting process. The machines available in each of these
 categories changes as access to machines change over time.
 
 CESM Validation
