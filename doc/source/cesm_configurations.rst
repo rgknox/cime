@@ -112,11 +112,9 @@ compset name has a corresponding short name. Users are not limited to
 the predefined component set combinations. A user may
 `define their own component set <http://esmci.github.io/cime/doc/build/html/users_guide/adding-cases.html>`_
 
-.. todo:: put in link for creating your own compset into the CIME user's guide
-
-See `supported component sets <../modelnl/compsets.html>`__ for a
+See `supported component sets <http://www.cesm.ucar.edu/models/cesm2.0/cesm/compsets.html>`_ for a
 complete list of supported compset options. Running
-``manage\_case`` with the ``--query-compsets_setby`` option will
+**manage_case** with the ``--query-compsets_setby`` option will
 also always provide a listing of the supported out-of-the-box component
 sets for the local version of CESM.
 
@@ -151,7 +149,7 @@ also supported on that grid. The cubed sphere grid is used only by the
 active atmosphere model, cam. And the displaced pole and tripole grids
 are used by the ocean and ice models. Not every grid can be run by every
 component. The ocean and ice models run on either a Greenland dipole or
-a tripole grid. The `Greenland Pole grid <gx3v7_120309_pole.png>`__ is a
+a tripole grid. The Greenland Pole grid is a
 latitude/longitude grid, with the North Pole displaced over Greenland to
 avoid singularity problems in the ocn and ice models. The low-resolution
 Greenland pole mesh from CCSM3 is illustrated in `Yeager et al., "The
@@ -161,6 +159,7 @@ Similarly, the `Poseidon tripole
 grid <http://climate.lanl.gov/Models/POP/>`__ is a latitude/longitude
 grid with three poles that are all centered over land.
 
+.. todo:: add link for tripole grid - base it off of the pop reference manual
 
 CESM Machines
 -------------
@@ -178,13 +177,16 @@ resulting xml files to fill in information required for the target
 platform. This functionality is handy in accelerating the porting
 process and quickly getting a case running on a new platform. For more
 information on porting, see the
-`cime porting guide <http://esmci.github.io/cime/doc/build/html/users_guide/index.html#cime-user-s-guide-part-2-cime-internals-porting-and-testing>`_.  The list of available machines are
-documented in `CESM supported machines <>`__.
+`CIME porting guide <http://esmci.github.io/cime/doc/build/html/users_guide/index.html#cime-user-s-guide-part-2-cime-internals-porting-and-testing>`_.  The list of available machines are
+documented in `CESM supported machines <http://www.cesm.ucar.edu/models/cesm2.0/cesm/machines.html>`_.
 Running **create_newcase** with the "-list"
 option will also show the list of available machines for the current
 local version of CESM. Supported machines have undergone the full CESM
 porting process. The machines available in each of these
 categories changes as access to machines change over time.
+
+.. todo:: put in link to scientifically supported model results
+
 
 CESM Validation
 ---------------
@@ -200,3 +202,4 @@ guaranteed due to variations in compiler or system versions. Users
 should carry out their own validations on any platform prior to doing
 scientific runs or scientific analysis and documentation.
 
+.. todo:: put in link to PyCECT tool

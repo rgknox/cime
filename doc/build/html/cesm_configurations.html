@@ -347,13 +347,9 @@ some characters that are indicative of the configuration setup. Each
 compset name has a corresponding short name. Users are not limited to
 the predefined component set combinations. A user may
 <a class="reference external" href="http://esmci.github.io/cime/doc/build/html/users_guide/adding-cases.html">define their own component set</a></p>
-<div class="admonition-todo admonition" id="index-0">
-<p class="first admonition-title">Todo</p>
-<p class="last">put in link for creating your own compset into the CIME user&#8217;s guide</p>
-</div>
-<p>See <a class="reference external" href="../modelnl/compsets.html">supported component sets</a> for a
+<p>See <a class="reference external" href="http://www.cesm.ucar.edu/models/cesm2.0/cesm/compsets.html">supported component sets</a> for a
 complete list of supported compset options. Running
-<code class="docutils literal"><span class="pre">manage\_case</span></code> with the <code class="docutils literal"><span class="pre">--query-compsets_setby</span></code> option will
+<strong>manage_case</strong> with the <code class="docutils literal"><span class="pre">--query-compsets_setby</span></code> option will
 also always provide a listing of the supported out-of-the-box component
 sets for the local version of CESM.</p>
 <p>In general, the first letter of a compset name indicates which
@@ -384,7 +380,7 @@ also supported on that grid. The cubed sphere grid is used only by the
 active atmosphere model, cam. And the displaced pole and tripole grids
 are used by the ocean and ice models. Not every grid can be run by every
 component. The ocean and ice models run on either a Greenland dipole or
-a tripole grid. The <a class="reference external" href="gx3v7_120309_pole.png">Greenland Pole grid</a> is a
+a tripole grid. The Greenland Pole grid is a
 latitude/longitude grid, with the North Pole displaced over Greenland to
 avoid singularity problems in the ocn and ice models. The low-resolution
 Greenland pole mesh from CCSM3 is illustrated in <a class="reference external" href="http://journals.ametsoc.org/doi/pdf/10.1175/JCLI3744.1">Yeager et al., &#8220;The
@@ -393,6 +389,10 @@ Web.</a>
 Similarly, the <a class="reference external" href="http://climate.lanl.gov/Models/POP/">Poseidon tripole
 grid</a> is a latitude/longitude
 grid with three poles that are all centered over land.</p>
+<div class="admonition-todo admonition" id="index-0">
+<p class="first admonition-title">Todo</p>
+<p class="last">add link for tripole grid - base it off of the pop reference manual</p>
+</div>
 </div>
 <div class="section" id="cesm-machines">
 <h2>3.4. CESM Machines<a class="headerlink" href="#cesm-machines" title="Permalink to this headline">¶</a></h2>
@@ -409,8 +409,8 @@ resulting xml files to fill in information required for the target
 platform. This functionality is handy in accelerating the porting
 process and quickly getting a case running on a new platform. For more
 information on porting, see the
-<a class="reference external" href="http://esmci.github.io/cime/doc/build/html/users_guide/index.html#cime-user-s-guide-part-2-cime-internals-porting-and-testing">cime porting guide</a>.  The list of available machines are
-documented in <a href="#id2"><span class="problematic" id="id3">`CESM supported machines &lt;&gt;`__</span></a>.
+<a class="reference external" href="http://esmci.github.io/cime/doc/build/html/users_guide/index.html#cime-user-s-guide-part-2-cime-internals-porting-and-testing">CIME porting guide</a>.  The list of available machines are
+documented in <a class="reference external" href="http://www.cesm.ucar.edu/models/cesm2.0/cesm/machines.html">CESM supported machines</a>.
 Running <strong>create_newcase</strong> with the &#8220;-list&#8221;
 option will also show the list of available machines for the current
 local version of CESM. Supported machines have undergone the full CESM
@@ -455,7 +455,7 @@ scientific runs or scientific analysis and documentation.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, Alice Bertini, Jim Edwards, Mariana Vertenstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
     </div>
   </body>
 </html>

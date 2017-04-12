@@ -96,14 +96,12 @@ installing and running CESM.
 -  `NetCDF 4.3 or
    newer <http://www.unidata.ucar.edu/software/netcdf/>`__.
 
--  `ESMF 5.2.0 or newer
-   (optional) <http://www.earthsystemmodeling.org/>`__.
+-  `ESMF 5.2.0 or newer (optional) <http://www.earthsystemmodeling.org/>`__.
 
--  `pnetcdf 1.7.0 is required and 1.8.1 is
-   recommended <http://trac.mcs.anl.gov/projects/parallel-netcdf/>`__
+-  `pnetcdf 1.7.0 is required and 1.8.1 is optional but recommended <http://trac.mcs.anl.gov/projects/parallel-netcdf/>`__
 
 -  `Trilinos <http://trilinos.sandia.gov/>`__ may be required for
-   certain configurations
+   certain configurations 
 
 -  `LAPACK <http://www.netlib.org/lapack/>`__ or a vendor supplied
    equivalent may also be required for some configurations.
