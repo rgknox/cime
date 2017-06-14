@@ -1,4 +1,466 @@
 ======================================================================
+
+Originator: Chris Fischer 
+Date: 6-10-2017
+Tag: cime5.3.0-alpha.26
+Answer Changes: None
+Tests:  scripts_regression_tests.py J_TestCreateNewcase
+        scripts_regression_tests
+Dependencies:
+
+Brief Summary:
+    - Provides better description of CCSM_BGC xml variable for both ACME and
+      CESM
+    - Add a test to scripts_regression_tests.py to assure that instantiating a
+      case does not invoke a flush command.
+    - User compset fixes.
+
+User interface changes: 
+
+PR summary: git log --oneline --first-parent [previous_tag]..master 
+f8eb8b4 Merge pull request #1670 from ESMCI/mvertens/fix_ccsm_bgc_desc
+8ea2801 Merge pull request #1666 from jedwards4b/case_instantiate_test
+383c1f5 Merge pull request #1667 from billsacks/user_compset_fixes
+
+
+Modified files: git diff --name-status [previous_tag]
+M       scripts/create_newcase
+M       scripts/lib/CIME/case.py
+M       scripts/tests/scripts_regression_tests.py
+M       src/drivers/mct/cime_config/config_component_acme.xml
+M       src/drivers/mct/cime_config/config_component_cesm.xml
+M       src/drivers/mct/cime_config/namelist_definition_drv.xml
+
+======================================================================
+
+======================================================================
+
+Originator: Chris Fischer	 
+Date: 6-8-2017
+Tag: cime5.3.0-alpha.25
+Answer Changes: None
+Tests:  scripts_regression_tests.py, SMS_D.f19_f19.F1850.cori-knl_intel 
+        create_test cime_developer 
+Dependencies:
+
+Brief Summary:
+    - Remove COMP_INTERFACE references to esmf and downcase the value.
+    - Make Flgl_qice attname consistent with name.
+
+User interface changes: 
+
+PR summary: git log --oneline --first-parent [previous_tag]..master 
+aadee35 Merge pull request #1663 from jedwards4b/comp_interface_fix
+f8f6221 Merge pull request #1662 from billsacks/fix_flgl
+
+
+Modified files: git diff --name-status [previous_tag]
+M       config/acme/machines/Makefile
+M       config/cesm/machines/Makefile
+M       scripts/lib/CIME/build.py
+M       scripts/lib/CIME/test_scheduler.py
+M       src/drivers/mct/cime_config/config_component.xml
+M       src/drivers/mct/shr/seq_flds_mod.F90
+
+
+======================================================================
+
+======================================================================
+
+Originator: Chris Fischer 
+Date: 6-8-2017
+Tag: cime5.3.0-alpha.24
+Answer Changes: None
+Tests: scripts_regression_tests.py
+Dependencies:
+
+Brief Summary:
+    - Convert user_mods_dir to abspath earlier.
+    - Update gnu modules on cheyenne to use openmpi.
+    - Fix failing builds on CIME master.
+    - Update cime users guide.
+    - Cleanup and fixes addressing running scripts_regression_tests.py on a mac.
+    - Update contents after create_case.
+    - Define out-of-the-box.
+    - Update case-basics
+    - Replace manage_case with query_case.
+    - Updates modules for cori-knl in cesm.
+    - Update cime users guide.
+    - Add a grid alias and new test to mct driver testlist.
+    - Merge of bjsmith changes to cime users guide.
+    - New match attribute that can be 'last' or 'first' for values match in
+      component.py
+
+User interface changes: 
+    - New match attribute elements that are children of <entry> nodes.
+
+PR summary: git log --oneline --first-parent [previous_tag]..master 
+72198f2 Merge pull request #1657 from billsacks/usermods_relative_path
+9ae4f31 Merge pull request #1661 from ESMCI/fischer/gnu_cheyenne
+9a43e4b hot fix for issue 1656
+75c1967 Merge pull request #1652 from bjsmith2014/master
+86912da Merge pull request #1645 from jedwards4b/macport_issues
+8517405 Update contents after create_case
+435b426 Define out-of-the-box
+cb41c58 Update case-basics
+6e72a7b replace manage_case with query_case
+19a4641 Merge pull request #1649 from jedwards4b/cori_update
+543629e Merge pull request #1648 from bjsmith2014/master
+0ab580e Merge pull request #1646 from ESMCI/fischer/TestGridUpdate
+c26ec40 Merge pull request #1641 from bjsmith2014/master
+0d1bbd8 Merge pull request #1636 from ESMCI/mvertens/new_component_matches
+3b238a8 Merge pull request #1635 from bjsmith2014/master
+
+Modified files: git diff --name-status [previous_tag]
+M       config/acme/machines/Makefile
+M       config/cesm/config_grids.xml
+M       config/cesm/machines/Makefile
+M       config/cesm/machines/config_machines.xml
+M       config/xml_schemas/config_compsets.xsd
+M       doc/source/users_guide/building-a-case.rst
+M       doc/source/users_guide/case-basics.rst
+M       doc/source/users_guide/cime-internals.rst
+M       doc/source/users_guide/cloning-a-case.rst
+M       doc/source/users_guide/create-a-case.rst
+M       doc/source/users_guide/customizing-a-case.rst
+M       doc/source/users_guide/introduction-and-overview.rst
+M       doc/source/users_guide/optimizing-processor-layout.rst
+M       doc/source/users_guide/porting-cime.rst
+M       doc/source/users_guide/running-a-case.rst
+M       doc/source/users_guide/setting-up-a-case.rst
+M       doc/source/users_guide/troubleshooting.rst
+M       scripts/create_newcase
+M       scripts/lib/CIME/SystemTests/system_tests_common.py
+M       scripts/lib/CIME/XML/component.py
+M       scripts/lib/CIME/XML/entry_id.py
+M       scripts/lib/CIME/XML/machines.py
+M       src/build_scripts/buildlib.csm_share
+M       src/components/data_comps/datm/cime_config/config_component.xml
+M       src/components/data_comps/desp/cime_config/config_component.xml
+M       src/components/data_comps/dice/cime_config/config_component.xml
+M       src/components/data_comps/dlnd/cime_config/config_component.xml
+M       src/components/data_comps/docn/cime_config/config_component.xml
+M       src/components/data_comps/drof/cime_config/config_component.xml
+M       src/components/data_comps/dwav/cime_config/config_component.xml
+M       src/drivers/mct/cime_config/config_component.xml
+M       src/drivers/mct/cime_config/config_component_acme.xml
+M       src/drivers/mct/cime_config/config_component_cesm.xml
+M       src/drivers/mct/cime_config/testdefs/testlist_drv.xml
+
+
+======================================================================
+
+======================================================================
+
+Originator: Chris Fischer	 
+Date: 6-4-2017
+Tag: cime5.3.0-alpha.23
+Answer Changes: None
+Tests: scripts_regression_tests
+       pylint, unit-tests
+Dependencies:
+
+Brief Summary:
+    - Fixes a critical error for ERP tests.
+    - Change run_cmd_no_fail doctest to not match directory.
+    - Bring bless_test_results behavior into an exact match with create_test -g.
+    - Merge and update CIME users guide rst source.
+    - Fix a critical problem in code_checker that caused it to filter too many files.
+    - Copied doc dir into master in order to create a gh-pages orphan branch.
+    - Fix race condition with case XML files when using set_file and some other unrelated bugs.
+
+User interface changes: 
+
+PR summary: git log --oneline --first-parent [previous_tag]..master 
+4525e19 Merge pull request #1639 from ESMCI/mvertens/python3string_fixes
+4775d9a Change run_cmd_no_fail doctest to not match directory
+4db9834 Merge pull request #1632 from ESMCI/jgfouca/generate_baseline_should_include_logs
+4ba0b44 Merge pull request #1631 from bjsmith2014/master
+37e4ed7 Merge pull request #1629 from ESMCI/jgfouca/pylint_fixes_and_more
+6a7ffc2 Merge pull request #1623 from bertinia/master
+65bd395 Merge pull request #1616 from ESMCI/jgfouca/fix_race
+
+
+Modified files: git diff --name-status [previous_tag]
+M	.gitignore
+A	.nojekyll
+M	LICENSE.TXT
+A	doc/Makefile
+A	doc/source/_static
+A	doc/source/build_cpl/index.rst
+A	doc/source/build_cpl/introduction.rst
+A	doc/source/conf.py
+A	doc/source/conf.py_old
+A	doc/source/data_models/data-atm.rst
+A	doc/source/data_models/data-lnd.rst
+A	doc/source/data_models/data-model-science.rst
+A	doc/source/data_models/data-ocean.rst
+A	doc/source/data_models/data-river.rst
+A	doc/source/data_models/data-seaice.rst
+A	doc/source/data_models/data-wave.rst
+A	doc/source/data_models/design-details.rst
+A	doc/source/data_models/index.rst
+A	doc/source/data_models/input-streams.rst
+A	doc/source/data_models/introduction.rst
+A	doc/source/driver_cpl/bit-for-bit-flag.rst
+A	doc/source/driver_cpl/budgets.rst
+A	doc/source/driver_cpl/cplug-02.1-figx1.jpg
+A	doc/source/driver_cpl/design.rst
+A	doc/source/driver_cpl/driver_threading_control.rst
+A	doc/source/driver_cpl/grids.rst
+A	doc/source/driver_cpl/history-and-restarts.rst
+A	doc/source/driver_cpl/implementation.rst
+A	doc/source/driver_cpl/index.rst
+A	doc/source/driver_cpl/initialization-and-restart.rst
+A	doc/source/driver_cpl/introduction.rst
+A	doc/source/driver_cpl/multi-instance.rst
+A	doc/source/driver_cpl/namelist-overview.rst
+A	doc/source/driver_cpl/time-management.rst
+A	doc/source/index.rst
+A	doc/source/misc_tools/index.rst
+A	doc/source/users_guide/adding-cases.rst
+A	doc/source/users_guide/building-a-case.rst
+A	doc/source/users_guide/case-basics.rst
+A	doc/source/users_guide/cime-internals.rst
+A	doc/source/users_guide/cloning-a-case.rst
+A	doc/source/users_guide/create-a-case.rst
+A	doc/source/users_guide/customizing-a-case.rst
+A	doc/source/users_guide/faq/basics-a-basic-example.rst
+A	doc/source/users_guide/faq/basics-mpi-example.rst
+A	doc/source/users_guide/faq/basics-setting-up-a-branch-or-hybrid-run.rst
+A	doc/source/users_guide/faq/faq.rst
+A	doc/source/users_guide/index.rst
+A	doc/source/users_guide/introduction-and-overview.rst
+A	doc/source/users_guide/multi-instance.rst
+A	doc/source/users_guide/optimizing-processor-layout.rst
+A	doc/source/users_guide/porting-cime.rst
+A	doc/source/users_guide/running-a-case.rst
+A	doc/source/users_guide/setting-up-a-case.rst
+A	doc/source/users_guide/testing.rst
+A	doc/source/users_guide/troubleshooting.rst
+A	doc/source/users_guide/unit_testing.rst
+A	doc/source/what_cime/index.rst
+A	index.html
+M	scripts/Tools/normalize_cases
+M	scripts/lib/CIME/SystemTests/erp.py
+M	scripts/lib/CIME/SystemTests/homme.py
+M	scripts/lib/CIME/SystemTests/ncr.py
+M	scripts/lib/CIME/SystemTests/system_tests_common.py
+M	scripts/lib/CIME/XML/machines.py
+M	scripts/lib/CIME/build.py
+M	scripts/lib/CIME/case.py
+M	scripts/lib/CIME/code_checker.py
+M	scripts/lib/CIME/hist_utils.py
+M	scripts/lib/CIME/utils.py
+M	scripts/lib/CIME/wait_for_tests.py
+M	scripts/tests/scripts_regression_tests.py
+
+======================================================================
+
+======================================================================
+
+Originator: Chris Fischer
+Date: 5-28-2017
+Tag: cime5.3.0-alpha.22
+Answer Changes: Climate Changing for active two-way coupled GLC
+Tests: Ran gnu TG smoke tests
+       aux_clm45 yellowstone_gnu
+       create_test cime_developer --queue long
+       scripts_regression_tests.py --fast
+       code_checker and scripts_regressions_tests.pr
+       CECO.hobart_pgi build
+        
+Dependencies:
+
+Brief Summary:
+    - Remove no-longer-needed CISM_GNU setting.
+    - Add more error-checking with gnu in debug mode.
+    - Map SMB from lnd to glc using bilinear mapping with a conservation
+      correction.
+    - Do not eval words - only strings with whitespace.
+    - Change all python2 style strings to python3 style strings.
+    - Update the user_defined template.
+    - Update testreporter and change hobart queue to medium.
+    - Improve handling of hist comparisons in TestStatus.log.
+    - Update PGI compiler to 17.04 on hobart.
+    - Downscale build parellism on small machines.
+
+User interface changes: 
+    - New drv_in namelist variable: 'glc_renormalize_smb'
+    - Contents of TestStatus.log.
+    - Automatic downscale of builds.
+
+PR summary: git log --oneline --first-parent [previous_tag]..master 
+2f6e683 Merge pull request #1620 from billsacks/remove_cism_gnu
+4f08bb0 Merge pull request #1618 from billsacks/gnu_debug_flags
+7a5242d Merge pull request #1609 from billsacks/lnd2glc_bilinear
+21f2a20 Merge pull request #1614 from jedwards4b/eval_fix
+2890518 Merge pull request #1608 from ESMCI/erichlf/3strings
+fb3f533 Merge pull request #1611 from jedwards4b/update_user_defined
+162ba85 Merge pull request #1610 from ESMCI/fischer/testreporter_fix
+a9cc09c Merge pull request #1606 from ESMCI/jgfouca/improve_logs_for_compares
+2deb949 Merge pull request #1602 from mnlevy1981/machines/hobart_pgi_ver
+0b55ea3 Merge pull request #1605 from ESMCI/jgfouca/downscale_builds_on_small_machs
+
+
+Modified files: git diff --name-status [previous_tag]
+M	config/acme/machines/template.st_archive
+M	config/cesm/machines/Makefile
+M	config/cesm/machines/config_batch.xml
+M	config/cesm/machines/config_compilers.xml
+M	config/cesm/machines/config_machines.xml
+M	config/cesm/machines/template.st_archive
+M	config/cesm/machines/userdefined_laptop_template/README.md
+M	config/cesm/machines/userdefined_laptop_template/config_compilers.xml
+M	config/cesm/machines/userdefined_laptop_template/config_machines.xml
+M	scripts/Tools/acme_check_env
+M	scripts/Tools/bless_test_results
+M	scripts/Tools/case.build
+M	scripts/Tools/case.cmpgen_namelists
+M	scripts/Tools/case.setup
+M	scripts/Tools/case_diff
+M	scripts/Tools/check_case
+M	scripts/Tools/check_input_data
+M	scripts/Tools/check_lockedfiles
+M	scripts/Tools/cime_bisect
+M	scripts/Tools/code_checker
+M	scripts/Tools/compare_namelists
+M	scripts/Tools/compare_test_results
+M	scripts/Tools/component_compare_baseline
+M	scripts/Tools/component_compare_copy
+M	scripts/Tools/component_compare_test
+M	scripts/Tools/component_generate_baseline
+M	scripts/Tools/cs.status
+M	scripts/Tools/jenkins_generic_job
+M	scripts/Tools/list_acme_tests
+M	scripts/Tools/normalize_cases
+M	scripts/Tools/pelayout
+M	scripts/Tools/pointclm/makepointdata.py
+M	scripts/Tools/pointclm/post_process.py
+M	scripts/Tools/pointclm/site_fullrun.py
+M	scripts/Tools/preview_run
+M	scripts/Tools/save_provenance
+M	scripts/Tools/simple_compare
+M	scripts/Tools/testreporter.py
+M	scripts/Tools/update_acme_tests
+M	scripts/Tools/xmlconvertors/config_pes_converter.py
+M	scripts/Tools/xmlconvertors/grid_xml_converter.py
+M	scripts/create_newcase
+M	scripts/fortran_unit_testing/python/printer.py
+M	scripts/fortran_unit_testing/run_tests.py
+M	scripts/lib/CIME/BuildTools/configure.py
+M	scripts/lib/CIME/BuildTools/macrowriterbase.py
+M	scripts/lib/CIME/SystemTests/dae.py
+M	scripts/lib/CIME/SystemTests/eri.py
+M	scripts/lib/CIME/SystemTests/erio.py
+M	scripts/lib/CIME/SystemTests/erp.py
+M	scripts/lib/CIME/SystemTests/err.py
+M	scripts/lib/CIME/SystemTests/ers.py
+M	scripts/lib/CIME/SystemTests/ers2.py
+M	scripts/lib/CIME/SystemTests/homme.py
+M	scripts/lib/CIME/SystemTests/nck.py
+M	scripts/lib/CIME/SystemTests/ncr.py
+M	scripts/lib/CIME/SystemTests/nodefail.py
+M	scripts/lib/CIME/SystemTests/pea.py
+M	scripts/lib/CIME/SystemTests/pem.py
+M	scripts/lib/CIME/SystemTests/pet.py
+M	scripts/lib/CIME/SystemTests/pre.py
+M	scripts/lib/CIME/SystemTests/seq.py
+M	scripts/lib/CIME/SystemTests/ssp.py
+M	scripts/lib/CIME/SystemTests/system_tests_common.py
+M	scripts/lib/CIME/SystemTests/system_tests_compare_two.py
+M	scripts/lib/CIME/XML/archive.py
+M	scripts/lib/CIME/XML/batch.py
+M	scripts/lib/CIME/XML/compilerblock.py
+M	scripts/lib/CIME/XML/compilers.py
+M	scripts/lib/CIME/XML/component.py
+M	scripts/lib/CIME/XML/compsets.py
+M	scripts/lib/CIME/XML/entry_id.py
+M	scripts/lib/CIME/XML/env_archive.py
+M	scripts/lib/CIME/XML/env_base.py
+M	scripts/lib/CIME/XML/env_batch.py
+M	scripts/lib/CIME/XML/env_mach_pes.py
+M	scripts/lib/CIME/XML/env_mach_specific.py
+M	scripts/lib/CIME/XML/env_test.py
+M	scripts/lib/CIME/XML/files.py
+M	scripts/lib/CIME/XML/generic_xml.py
+M	scripts/lib/CIME/XML/grids.py
+M	scripts/lib/CIME/XML/machines.py
+M	scripts/lib/CIME/XML/namelist_definition.py
+M	scripts/lib/CIME/XML/pes.py
+M	scripts/lib/CIME/XML/test_reporter.py
+M	scripts/lib/CIME/XML/testlist.py
+M	scripts/lib/CIME/XML/tests.py
+M	scripts/lib/CIME/XML/testspec.py
+M	scripts/lib/CIME/aprun.py
+M	scripts/lib/CIME/bless_test_results.py
+M	scripts/lib/CIME/build.py
+M	scripts/lib/CIME/buildlib.py
+M	scripts/lib/CIME/buildnml.py
+M	scripts/lib/CIME/case.py
+M	scripts/lib/CIME/case_cmpgen_namelists.py
+M	scripts/lib/CIME/case_setup.py
+M	scripts/lib/CIME/case_st_archive.py
+M	scripts/lib/CIME/case_test.py
+M	scripts/lib/CIME/check_input_data.py
+M	scripts/lib/CIME/check_lockedfiles.py
+M	scripts/lib/CIME/compare_namelists.py
+M	scripts/lib/CIME/compare_test_results.py
+M	scripts/lib/CIME/get_timing.py
+M	scripts/lib/CIME/hist_utils.py
+M	scripts/lib/CIME/namelist.py
+M	scripts/lib/CIME/nmlgen.py
+M	scripts/lib/CIME/preview_namelists.py
+M	scripts/lib/CIME/provenance.py
+M	scripts/lib/CIME/simple_compare.py
+M	scripts/lib/CIME/test_scheduler.py
+M	scripts/lib/CIME/test_status.py
+M	scripts/lib/CIME/test_utils.py
+M	scripts/lib/CIME/tests/SystemTests/test_system_tests_compare_two.py
+M	scripts/lib/CIME/tests/SystemTests/test_system_tests_compare_two_link_to_case2_output.py
+M	scripts/lib/CIME/tests/test_user_mod_support.py
+M	scripts/lib/CIME/user_mod_support.py
+M	scripts/lib/CIME/utils.py
+M	scripts/lib/CIME/wait_for_tests.py
+M	scripts/lib/jenkins_generic_job.py
+M	scripts/lib/update_acme_tests.py
+M	scripts/tests/list_tests
+M	scripts/tests/scripts_regression_tests.py
+M	src/drivers/mct/cime_config/namelist_definition_drv.xml
+M	src/drivers/mct/main/CMakeLists.txt
+M	src/drivers/mct/main/map_lnd2glc_mod.F90
+M	src/drivers/mct/main/prep_glc_mod.F90
+M	src/drivers/mct/main/prep_lnd_mod.F90
+D	src/drivers/mct/main/vertical_gradient_calculator_2nd_order.F90
+D	src/drivers/mct/main/vertical_gradient_calculator_base.F90
+D	src/drivers/mct/main/vertical_gradient_calculator_factory.F90
+M	src/drivers/mct/shr/glc_elevclass_mod.F90
+M	src/drivers/mct/shr/seq_infodata_mod.F90
+M	src/drivers/mct/unit_test/CMakeLists.txt
+M	src/drivers/mct/unit_test/glc_elevclass_test/test_glc_elevclass.pf
+D	src/drivers/mct/unit_test/map_lnd2glc_test/CMakeLists.txt
+D	src/drivers/mct/unit_test/map_lnd2glc_test/test_map_lnd2glc.pf
+M	src/drivers/mct/unit_test/stubs/CMakeLists.txt
+D	src/drivers/mct/unit_test/stubs/vertical_gradient_calculator_constant.F90
+D	src/drivers/mct/unit_test/vertical_gradient_calculator_test/CMakeLists.txt
+D	src/drivers/mct/unit_test/vertical_gradient_calculator_test/README
+D	src/drivers/mct/unit_test/vertical_gradient_calculator_test/gradient_example.txt
+D	src/drivers/mct/unit_test/vertical_gradient_calculator_test/plot_gradient
+D	src/drivers/mct/unit_test/vertical_gradient_calculator_test/test_vertical_gradient_calculator_2nd_order.pf
+D	src/drivers/mct/unit_test/vertical_gradient_calculator_test/test_vertical_gradient_calculator_factory.pf
+M	src/share/test/unit/shr_string_test/test_shr_string.pf
+M	src/share/util/shr_string_mod.F90
+M	tools/load_balancing_tool/code/merge.py
+M	tools/load_balancing_tool/code/neos.py
+M	tools/statistical_ensemble_test/pyCECT/pyCECT.py
+M	tools/statistical_ensemble_test/pyCECT/pyEnsLib.py
+M	tools/statistical_ensemble_test/pyCECT/pyEnsSum.py
+M	tools/statistical_ensemble_test/pyCECT/pyEnsSumPop.py
+M	tools/utils/find_circular_dependency.py
+
+======================================================================
+
+======================================================================
 Originator: Chris Fischer 
 Date: 5-24-2017
 Tag: cime5.3.0-alpha.21

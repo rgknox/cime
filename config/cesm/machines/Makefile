@@ -88,13 +88,6 @@ ifeq ($(USE_ESMF_LIB), TRUE)
    CPPDEFS += -DUSE_ESMF_LIB
 endif
 
-# ESMF_INTERFACE is currently only defined in env_build.xml
-ifeq ($(COMP_INTERFACE), ESMF)
-   CPPDEFS += -DESMF_INTERFACE
-else
-   CPPDEFS += -DMCT_INTERFACE
-endif
-
 ifeq ($(strip $(MPILIB)),mpi-serial)
   CPPDEFS += -DNO_MPI2
 else
@@ -225,7 +218,9 @@ endif
 
 
 ifeq ($(MPILIB),mpi-serial)
-  undefine PNETCDF_PATH
+  ifdef PNETCDF_PATH
+    undefine PNETCDF_PATH
+  endif
 else
   ifdef PNETCDF_PATH
     ifndef $(INC_PNETCDF)

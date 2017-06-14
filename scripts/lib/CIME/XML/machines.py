@@ -38,7 +38,7 @@ class Machines(GenericXML):
         # Append the contents of $HOME/.cime/config_machines.xml if it exists
         # This could cause problems if node matchs are repeated when only one is expected
         local_infile = os.path.join(os.environ.get("HOME"),".cime","config_machines.xml")
-        logger.debug("Infile: {}" , local_infile)
+        logger.debug("Infile: {}".format(local_infile))
         if os.path.exists(local_infile):
             GenericXML.read(self, local_infile, schema)
 
@@ -163,7 +163,7 @@ class Machines(GenericXML):
             self.machine = machine
 
         return machine
-
+    #pylint: disable=arguments-differ
     def get_value(self, name, attributes=None, resolved=True, subgroup=None):
         """
         Get Value of fields in the config_machines.xml file
@@ -211,7 +211,7 @@ class Machines(GenericXML):
 
         expect(supported_values is not None,
                "No list found for " + listname + " on machine " + self.machine)
-        supported_values = supported_values.split(",")
+        supported_values = supported_values.split(",") #pylint: disable=no-member
 
         if reqval is None or reqval == "UNSET":
             return supported_values[0]
@@ -291,7 +291,7 @@ class Machines(GenericXML):
     def print_values(self):
         # write out machines
         machines = self.get_nodes(nodename="machine")
-        print  "Machines"
+        print( "Machines")
         for machine in machines:
             name = machine.get("MACH")
             desc = machine.find("DESC")
@@ -300,10 +300,10 @@ class Machines(GenericXML):
             max_tasks_per_node = machine.find("MAX_TASKS_PER_NODE")
             pes_per_node = machine.find("PES_PER_NODE")
 
-            print  "  {} : {} ".format(name , desc.text)
-            print  "      os             ", os_.text
-            print  "      compilers      ",compilers.text
+            print( "  {} : {} ".format(name , desc.text))
+            print( "      os             ", os_.text)
+            print( "      compilers      ",compilers.text)
             if pes_per_node is not None:
-                print  "      pes/node       ",pes_per_node.text
+                print( "      pes/node       ",pes_per_node.text)
             if max_tasks_per_node is not None:
-                print  "      max_tasks/node ",max_tasks_per_node.text
+                print( "      max_tasks/node ",max_tasks_per_node.text)

@@ -262,6 +262,15 @@ class J_TestCreateNewcase(unittest.TestCase):
 
         cls._do_teardown.append(testdir)
 
+    def test_aa_no_flush_on_instantiate(self):
+        testdir = os.path.join(self.__class__._testroot, 'testcreatenewcase')
+        with Case(testdir, read_only=False) as case:
+            self.assertFalse(case._env_files_that_need_rewrite, msg="Instantiating a case should not trigger a flush call")
+        with Case(testdir, read_only=False) as case:
+            case.set_value("HIST_OPTION","nsteps")
+            self.assertTrue(case._env_files_that_need_rewrite, msg="Expected flush call not triggered")
+
+
     def test_b_user_mods(self):
         cls = self.__class__
 
@@ -867,7 +876,7 @@ class O_TestTestScheduler(TestCreateTestCommon):
                 self.assertEqual(ts.get_status(MEMLEAK_PHASE), TEST_FAIL_STATUS)
                 self.assertEqual(ts.get_status(CIME.test_scheduler.RUN_PHASE), TEST_PASS_STATUS)
             elif (test_name == test_diff_test):
-                self.assertEqual(ts.get_status("COMPARE_base_rest"), TEST_FAIL_STATUS)
+                self.assertEqual(ts.get_status("COMPARE_base_rest"), TEST_FAIL_STATUS, msg="Problem with %s" % test_diff_test)
                 self.assertEqual(ts.get_status(CIME.test_scheduler.RUN_PHASE), TEST_PASS_STATUS)
             else:
                 self.assertTrue(test_name in [pass_test, mem_pass_test])
@@ -1027,14 +1036,13 @@ class T_TestRunRestart(TestCreateTestCommon):
     ###########################################################################
     def test_run_restart(self):
     ###########################################################################
-        run_cmd_assert_result(self, "%s/create_test --test-root %s --output-root %s -t %s NODEFAIL_P1.f09_g16.X"
-                              % (SCRIPT_DIR, TEST_ROOT, TEST_ROOT, self._baseline_name))
+        run_cmd_assert_result(self, "{}/create_test --test-root {} --output-root {} -t {} NODEFAIL_P1.f09_g16.X".format(SCRIPT_DIR, TEST_ROOT, TEST_ROOT, self._baseline_name))
         if self._hasbatch:
             run_cmd_assert_result(self, "%s/wait_for_tests *%s/TestStatus" % (TOOLS_DIR, self._baseline_name),
                                   from_dir=self._testroot)
 
         casedir = os.path.join(self._testroot,
-                               "%s.%s" % (CIME.utils.get_full_test_name("NODEFAIL_P1.f09_g16.X", machine=self._machine, compiler=self._compiler), self._baseline_name))
+                               "{}.{}".format(CIME.utils.get_full_test_name("NODEFAIL_P1.f09_g16.X", machine=self._machine, compiler=self._compiler), self._baseline_name))
 
         fail_sentinel = os.path.join(casedir, "run", "FAIL_SENTINEL")
         self.assertTrue(os.path.exists(fail_sentinel), msg="Missing %s" % fail_sentinel)
@@ -1045,16 +1053,14 @@ class T_TestRunRestart(TestCreateTestCommon):
     def test_run_restart_too_many_fails(self):
     ###########################################################################
         os.environ["NODEFAIL_NUM_FAILS"] = "5"
-        run_cmd_assert_result(self, "%s/create_test --test-root %s --output-root %s -t %s NODEFAIL_P1.f09_g16.X"
-                              % (SCRIPT_DIR, TEST_ROOT, TEST_ROOT, self._baseline_name),
+        run_cmd_assert_result(self, "{}/create_test --test-root {} --output-root {} -t {} NODEFAIL_P1.f09_g16.X".format(SCRIPT_DIR, TEST_ROOT, TEST_ROOT, self._baseline_name),
                               expected_stat=(0 if self._hasbatch else CIME.utils.TESTS_FAILED_ERR_CODE))
         if self._hasbatch:
             run_cmd_assert_result(self, "%s/wait_for_tests *%s/TestStatus" % (TOOLS_DIR, self._baseline_name),
                                   from_dir=self._testroot, expected_stat=CIME.utils.TESTS_FAILED_ERR_CODE)
 
         casedir = os.path.join(self._testroot,
-                               "%s.%s" % (CIME.utils.get_full_test_name("NODEFAIL_P1.f09_g16.X", machine=self._machine, compiler=self._compiler), self._baseline_name))
-
+                               "{}.{}".format(CIME.utils.get_full_test_name("NODEFAIL_P1.f09_g16.X", machine=self._machine, compiler=self._compiler), self._baseline_name))
         fail_sentinel = os.path.join(casedir, "run", "FAIL_SENTINEL")
         self.assertTrue(os.path.exists(fail_sentinel), msg="Missing %s" % fail_sentinel)
 
